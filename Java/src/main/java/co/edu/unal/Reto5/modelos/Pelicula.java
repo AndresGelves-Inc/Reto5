@@ -6,6 +6,9 @@
 package co.edu.unal.Reto5.modelos;
 
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -15,20 +18,21 @@ import org.springframework.data.relational.core.mapping.Table;
  *
  * @author malej
  */
-//@Entity
+
 @Table("pelicula")
-public class Pelicula {
+public class Pelicula{
     
     @Id
+    @GeneratedValue
     private int id_pelicula;
     @Column("titulo")
     private String titulo;
     @Column("resumen")
     private String resumen;
     @Column("anio")
-    private int anio;
-    @Column("id_director")
-    private int id_director;
+    private String anio;
+    @Column("director")
+    private String director;
 
     public int getId_pelicula() {
         return id_pelicula;
@@ -54,27 +58,25 @@ public class Pelicula {
         this.resumen = resumen;
     }
 
-    public int getAnio() {
+    public String getAnio() {
         return anio;
     }
 
-    public void setAnio(int anio) {
+    public void setAnio(String anio) {
         this.anio = anio;
     }
 
-    public int getId_director() {
-        return id_director;
+    public String getDirector() {
+        return director;
     }
 
-    public void setId_director(int id_director) {
-        this.id_director = id_director;
-    }
-
-
+    public void setDirector(String director) {
+        this.director = director;
+    }    
 
     @Override
     public String toString() {
-        return "Pelicula: " + "id_pelicula: " + id_pelicula + "Título: " + titulo + ", resumen: " + resumen + ", anio: " + anio + ", director: " + id_director ;
+        return "Pelicula: " + "id_pelicula: " + id_pelicula + "Título: " + titulo + ", resumen: " + resumen + ", anio: " + anio + ", director: " + director ;
     }
     
     

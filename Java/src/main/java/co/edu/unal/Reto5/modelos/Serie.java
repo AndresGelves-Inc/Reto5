@@ -5,6 +5,7 @@
  */
 package co.edu.unal.Reto5.modelos;
 
+import javax.persistence.GeneratedValue;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -14,6 +15,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Serie {
     
     @Id
+    @GeneratedValue
     private int id_serie;
     @Column("titulo")
     private String titulo;

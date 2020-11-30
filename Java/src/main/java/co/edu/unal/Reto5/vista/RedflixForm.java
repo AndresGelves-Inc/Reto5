@@ -6,7 +6,13 @@
 
 package co.edu.unal.Reto5.vista;
 
-import javax.swing.ImageIcon;
+import co.edu.unal.Reto5.Reto5Application;
+import co.edu.unal.Reto5.SpringContext;
+import co.edu.unal.Reto5.modelos.Pelicula;
+import co.edu.unal.Reto5.modelos.Usuario;
+import co.edu.unal.Reto5.repositorios.RepositorioPelicula;
+import co.edu.unal.Reto5.repositorios.RepositorioUsuario;
+import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -15,10 +21,16 @@ import javax.swing.JOptionPane;
  * @author Felipe
  */
 public class RedflixForm extends javax.swing.JFrame {
+    RepositorioUsuario userRepo;
+    RepositorioPelicula movieRepo;
 
     /** Creates new form RedflixForm */
     public RedflixForm() {
         initComponents();
+        String[] args = {};
+        Reto5Application.runSpringServer(args);
+        
+        userRepo = SpringContext.getBean(RepositorioUsuario.class);
     }
 
     /** This method is called from within the constructor to
@@ -754,7 +766,31 @@ public class RedflixForm extends javax.swing.JFrame {
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
         if (RadioRegistrarUsu.isSelected() == true){
-            JOptionPane.showMessageDialog(null, IngresoNombreReg.getText() + IngresoApellidoReg.getText() + IngresoContrasenaReg.getText());
+            String user_id = IngresoUsuarioReg.getText();               
+            Optional<Usuario> result = userRepo.findById(user_id);
+            
+            Usuario newUser = new Usuario();
+            newUser.setUser_name(IngresoUsuarioReg.getText());
+            newUser.setNombre_user(IngresoNombreReg.getText());
+            newUser.setApellido_user(IngresoApellidoReg.getText());
+            newUser.setEmail(IngresoEmailReg.getText());
+            newUser.setContrasenia(IngresoContrasenaReg.getText());            
+                    
+            if (IngresoUsuarioReg != null & IngresoContrasenaReg != null & IngresoNombreReg != null){
+                if (result.isPresent()){
+                    System.out.println("Lo sentimos, el usuario no se encuentra disponible");
+                    JOptionPane.showMessageDialog(null, "Lo sentimos, el usuario \"" + IngresoUsuarioReg.getText() + "\" no se encuentra disponible. Por favor, intente con uno nuevo." );
+                    
+                } else {                   
+                    
+                    userRepo.save(newUser);
+                   System.out.println("El usuario" + IngresoUsuarioReg.getText() +"ha sido registrado correctamente"); 
+                   JOptionPane.showMessageDialog(null, "El usuario \"" + IngresoUsuarioReg.getText() + "\" has sido registrado correctamente." );
+                }
+                
+            }
+            
+            
         }
         
         RedflixPanel.setSelectedIndex(0);
@@ -794,10 +830,29 @@ public class RedflixForm extends javax.swing.JFrame {
     }//GEN-LAST:event_RadioRegistrarUsuMouseClicked
 
     private void AceptarPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarPeliculasActionPerformed
+        
+              
+        
         if (RadioRegistrarPel.isSelected() == true){
-            JOptionPane.showMessageDialog(null, IngresoTituloPelReg.getText());
-        }        
-        RedflixPanel.setSelectedIndex(0);
+            
+            Pelicula newMovie = new Pelicula();
+            newMovie.setTitulo(IngresoTituloPelReg.getText());
+            newMovie.setResumen(IngresoResumenPelReg.getText());
+            newMovie.setAnio(IngresoFechaPelReg.getText());
+            newMovie.setDirector(IngresoDirectorPelReg.getText());           
+                    
+            if (IngresoTituloPelReg != null){               
+                                                
+                movieRepo.save(newMovie);
+                System.out.println("Pelicula Registrada Correctamente"); 
+                JOptionPane.showMessageDialog(null, "La película \"" + IngresoTituloPelReg.getText() + "\" has sido registrada correctamente." );
+                
+            }
+            
+            //JOptionPane.showMessageDialog(null, IngresoNombreReg.getText() + IngresoApellidoReg.getText() + IngresoContrasenaReg.getText());
+        } 
+        
+        //RedflixPanel.setSelectedIndex(0);
 
 
 

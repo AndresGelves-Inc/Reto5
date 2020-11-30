@@ -13,6 +13,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author malej
  */
-public interface RepositorioUsuario extends CrudRepository<Usuario, Integer> {
+public interface RepositorioUsuario extends CrudRepository<Usuario, String> {
     
 }

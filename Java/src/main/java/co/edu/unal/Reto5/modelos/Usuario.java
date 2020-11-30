@@ -7,6 +7,8 @@ package co.edu.unal.Reto5.modelos;
 
 
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -17,7 +19,7 @@ import org.springframework.data.relational.core.mapping.Table;
  */
 
 @Table("usuario")
-public class Usuario implements Serializable {
+public class Usuario {
     
     @Id
     private String user_name;
@@ -33,7 +35,7 @@ public class Usuario implements Serializable {
     @Column("contrasenia")
     private String contrasenia;
     @Column("fecha_nacimiento")
-    private String fecha_nacimiento;
+    private Date fecha_nacimiento;
     //private int registro_transm_idregistro_transm;
 
     public String getUser_name() {
@@ -92,11 +94,11 @@ public class Usuario implements Serializable {
         this.contrasenia = contrasenia;
     }
 
-    public String getFecha_nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(String fecha_nacimiento) {
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
@@ -108,12 +110,15 @@ public class Usuario implements Serializable {
 //
 //    public void setRegistro_transm_idregistro_transm(int registro_transm_idregistro_transm) {
 //        this.registro_transm_idregistro_transm = registro_transm_idregistro_transm;
+    
 //    }
 
     @Override
     public String toString() {
         return "Usuario: " + user_name + ", nombre usuario: " + nombre_user + ", apellido usuario: " + apellido_user + ", email: " + email + ", celular: " + celular + ", contraseña: " + contrasenia + ", fecha_nacimiento: " + fecha_nacimiento;
     }
+    
+    
     
     
 }
