@@ -765,23 +765,31 @@ public class RedflixForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
+        
         if (RadioRegistrarUsu.isSelected() == true){
             String user_id = IngresoUsuarioReg.getText();               
             Optional<Usuario> result = userRepo.findById(user_id);
             
-            Usuario newUser = new Usuario();
-            newUser.setUser_name(IngresoUsuarioReg.getText());
-            newUser.setNombre_user(IngresoNombreReg.getText());
-            newUser.setApellido_user(IngresoApellidoReg.getText());
-            newUser.setEmail(IngresoEmailReg.getText());
-            newUser.setContrasenia(IngresoContrasenaReg.getText());            
-                    
             if (IngresoUsuarioReg != null & IngresoContrasenaReg != null & IngresoNombreReg != null){
                 if (result.isPresent()){
+                    
                     System.out.println("Lo sentimos, el usuario no se encuentra disponible");
                     JOptionPane.showMessageDialog(null, "Lo sentimos, el usuario \"" + IngresoUsuarioReg.getText() + "\" no se encuentra disponible. Por favor, intente con uno nuevo." );
+                    Usuario newUser = result.get();
                     
+                    newUser.setNombre_user(IngresoNombreReg.getText());
+                    newUser.setApellido_user(IngresoApellidoReg.getText());
+                    newUser.setEmail(IngresoEmailReg.getText());
+                    newUser.setContrasenia(IngresoContrasenaReg.getText());            
+                    
+                    userRepo.save(newUser);
                 } else {                   
+                    Usuario newUser = new Usuario();
+                    newUser.setUser_name(IngresoUsuarioReg.getText());
+                    newUser.setNombre_user(IngresoNombreReg.getText());
+                    newUser.setApellido_user(IngresoApellidoReg.getText());
+                    newUser.setEmail(IngresoEmailReg.getText());
+                    newUser.setContrasenia(IngresoContrasenaReg.getText());            
                     
                     userRepo.save(newUser);
                    System.out.println("El usuario" + IngresoUsuarioReg.getText() +"ha sido registrado correctamente"); 
@@ -789,13 +797,11 @@ public class RedflixForm extends javax.swing.JFrame {
                 }
                 
             }
-            
-            
+  
+        
+        
         }
-        
         RedflixPanel.setSelectedIndex(0);
-        
-        
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
