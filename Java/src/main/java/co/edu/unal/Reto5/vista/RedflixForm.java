@@ -9,8 +9,10 @@ package co.edu.unal.Reto5.vista;
 import co.edu.unal.Reto5.Reto5Application;
 import co.edu.unal.Reto5.SpringContext;
 import co.edu.unal.Reto5.modelos.Pelicula;
+import co.edu.unal.Reto5.modelos.Serie;
 import co.edu.unal.Reto5.modelos.Usuario;
 import co.edu.unal.Reto5.repositorios.RepositorioPelicula;
+import co.edu.unal.Reto5.repositorios.RepositorioSerie;
 import co.edu.unal.Reto5.repositorios.RepositorioUsuario;
 import java.util.Optional;
 import javax.swing.JFrame;
@@ -23,6 +25,7 @@ import javax.swing.JOptionPane;
 public class RedflixForm extends javax.swing.JFrame {
     RepositorioUsuario userRepo;
     RepositorioPelicula movieRepo;
+    RepositorioSerie repositorioSerie;
 
     /** Creates new form RedflixForm */
     public RedflixForm() {
@@ -98,6 +101,7 @@ public class RedflixForm extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         RadioRegistrarSer = new javax.swing.JRadioButton();
         RadioActualizarSer = new javax.swing.JRadioButton();
+        BuscarSeries = new javax.swing.JButton();
         BusquedaInterface = new javax.swing.JPanel();
         LabelBusqueda = new javax.swing.JLabel();
         IngresoBusqueda = new javax.swing.JTextField();
@@ -267,7 +271,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addComponent(LabelContrasena)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IngresoContrasenaReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         RadioRegistrarUsu.setText("Registrar");
@@ -412,7 +416,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addComponent(LabelDirectorPelReg)
                 .addGap(1, 1, 1)
                 .addComponent(IngresoDirectorPelReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         RadioRegistrarPel.setText("Registrar");
@@ -557,7 +561,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addComponent(LabelTemporadaSerReg)
                 .addGap(3, 3, 3)
                 .addComponent(IngresoTemporadasSerReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         RadioRegistrarSer.setText("Registrar");
@@ -600,6 +604,13 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
+        BuscarSeries.setText("Buscar");
+        BuscarSeries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarSeriesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SeriesInterfaceLayout = new javax.swing.GroupLayout(SeriesInterface);
         SeriesInterface.setLayout(SeriesInterfaceLayout);
         SeriesInterfaceLayout.setHorizontalGroup(
@@ -615,7 +626,9 @@ public class RedflixForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(AceptarSeries)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CancelarSeries)))
+                        .addComponent(CancelarSeries)
+                        .addGap(29, 29, 29)
+                        .addComponent(BuscarSeries)))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
         SeriesInterfaceLayout.setVerticalGroup(
@@ -630,7 +643,8 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AceptarSeries)
-                    .addComponent(CancelarSeries))
+                    .addComponent(CancelarSeries)
+                    .addComponent(BuscarSeries))
                 .addGap(60, 60, 60))
         );
 
@@ -954,6 +968,24 @@ public class RedflixForm extends javax.swing.JFrame {
         RadioSerBus.setSelected(false);
     }//GEN-LAST:event_RadioPelBusActionPerformed
 
+    private void BuscarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSeriesActionPerformed
+        
+        String titulo = IngresoTituloSerReg.getText();
+        Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
+        String BuscarTitulo = optionalSerie.getTitulo();
+        
+        if (BuscarTitulo.equals(titulo)) {
+            JOptionPane.showMessageDialog(null, "Serie disponible: " + BuscarTitulo
+                    + " consta de " + optionalSerie.getEpisodios() + " episodios en "
+                    + optionalSerie.getTemporadas() + " temporadas");
+            IngresoTituloSerReg.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "La serie Buscada no se encuentra disponible");
+            IngresoTituloSerReg.setText("");
+        }
+        
+    }//GEN-LAST:event_BuscarSeriesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1001,6 +1033,7 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JButton AgregarSerie;
     private javax.swing.JButton AgregarUsuario;
     private javax.swing.JButton Buscar;
+    private javax.swing.JButton BuscarSeries;
     private javax.swing.JButton Busqueda;
     private javax.swing.JPanel BusquedaInterface;
     private javax.swing.JButton Cancelar;
