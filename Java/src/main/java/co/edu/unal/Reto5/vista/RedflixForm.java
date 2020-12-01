@@ -102,6 +102,7 @@ public class RedflixForm extends javax.swing.JFrame {
         RadioRegistrarSer = new javax.swing.JRadioButton();
         RadioActualizarSer = new javax.swing.JRadioButton();
         BuscarSeries = new javax.swing.JButton();
+        ActualizarSeries = new javax.swing.JButton();
         BusquedaInterface = new javax.swing.JPanel();
         LabelBusqueda = new javax.swing.JLabel();
         IngresoBusqueda = new javax.swing.JTextField();
@@ -611,6 +612,13 @@ public class RedflixForm extends javax.swing.JFrame {
             }
         });
 
+        ActualizarSeries.setText("Actualizar");
+        ActualizarSeries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarSeriesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SeriesInterfaceLayout = new javax.swing.GroupLayout(SeriesInterface);
         SeriesInterface.setLayout(SeriesInterfaceLayout);
         SeriesInterfaceLayout.setHorizontalGroup(
@@ -628,8 +636,10 @@ public class RedflixForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CancelarSeries)
                         .addGap(29, 29, 29)
-                        .addComponent(BuscarSeries)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                        .addComponent(BuscarSeries)
+                        .addGap(18, 18, 18)
+                        .addComponent(ActualizarSeries)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         SeriesInterfaceLayout.setVerticalGroup(
             SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,7 +654,8 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AceptarSeries)
                     .addComponent(CancelarSeries)
-                    .addComponent(BuscarSeries))
+                    .addComponent(BuscarSeries)
+                    .addComponent(ActualizarSeries))
                 .addGap(60, 60, 60))
         );
 
@@ -986,6 +997,26 @@ public class RedflixForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BuscarSeriesActionPerformed
 
+    private void ActualizarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarSeriesActionPerformed
+        
+        String titulo = IngresoTituloSerReg.getText().toString();
+        int temporadas = Integer.parseInt(IngresoTemporadasSerReg.getText());
+        int episodios = Integer.parseInt(IngresoEpisodiosSerReg.getText());
+        try {
+            Serie serie = repositorioSerie.findByTitulo(titulo);
+            serie.setTemporadas(temporadas);
+            serie.setEpisodios(episodios);
+            serie = repositorioSerie.save(serie);
+            JOptionPane.showMessageDialog(null, "Los cambios fueron guardados con éxito");
+            IngresoTituloSerReg.setText("");
+            IngresoTemporadasSerReg.setText("");
+            IngresoEpisodiosSerReg.setText("");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
+        }
+        
+    }//GEN-LAST:event_ActualizarSeriesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1029,6 +1060,7 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JButton Aceptar;
     private javax.swing.JButton AceptarPeliculas;
     private javax.swing.JButton AceptarSeries;
+    private javax.swing.JButton ActualizarSeries;
     private javax.swing.JButton AgregarPelicula;
     private javax.swing.JButton AgregarSerie;
     private javax.swing.JButton AgregarUsuario;
