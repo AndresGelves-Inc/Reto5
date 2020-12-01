@@ -1,0 +1,12 @@
+co\edu\unal\Reto5\modelos\Serie.class
+co\edu\unal\Reto5\repositorios\RepositorioSerie.class
+co\edu\unal\Reto5\repositorios\RepositorioContenidos.class
+co\edu\unal\Reto5\repositorios\RepositorioRegistro_tranms.class
+co\edu\unal\Reto5\repositorios\RepositorioUsuario.class
+co\edu\unal\Reto5\modelos\Usuario.class
+co\edu\unal\Reto5\modelos\Registro_transm.class
+co\edu\unal\Reto5\modelos\Contenidos.class
+co\edu\unal\Reto5\modelos\Director.class
+co\edu\unal\Reto5\repositorios\RepositorioDirector.class
+co\edu\unal\Reto5\repositorios\RepositorioPelicula.class
+co\edu\unal\Reto5\modelos\Pelicula.class
