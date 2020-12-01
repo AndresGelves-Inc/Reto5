@@ -8,6 +8,7 @@ package co.edu.unal.Reto5.modelos;
 
 import java.beans.Statement;
 import java.sql.ResultSet;
+import javax.persistence.GeneratedValue;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
