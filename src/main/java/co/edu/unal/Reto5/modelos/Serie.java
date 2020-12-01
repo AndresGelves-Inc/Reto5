@@ -27,12 +27,12 @@ public class Serie {
     @Column("episodios")
     private Long episodios;
 
-    public int getId_serie() {
+    public int getId() {
         return id_serie;
     }
 
-    public void setId_serie(int id_serie) {
-        this.id_serie = id_serie;
+    public void setId(int id) {
+        this.id_serie = id;
     }
 
     public String getTitulo() {

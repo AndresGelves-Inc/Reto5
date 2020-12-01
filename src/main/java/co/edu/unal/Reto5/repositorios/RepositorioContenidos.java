@@ -13,5 +13,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author malej
  */
 public interface RepositorioContenidos extends CrudRepository<Contenidos, Integer> {
-    
+    Contenidos findByTitulos (String titulos); 
 }

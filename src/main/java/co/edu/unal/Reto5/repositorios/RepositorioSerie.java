@@ -21,8 +21,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositorioSerie extends CrudRepository<Serie, Integer> {
     
-    @Query("SELECT * FROM Serie WHERE titulo= :titulo")
-    Serie findByTitulo (@Param("titulo") String titulo); 
+//    @Query("SELECT * FROM Serie WHERE titulo= :titulo")
+    Serie findByTitulo (String titulo); 
     
 }
     

@@ -5,29 +5,23 @@
  */
 package co.edu.unal.Reto5.vista;
 
-import co.edu.unal.Reto5.Conexion;
+
 import co.edu.unal.Reto5.Reto5Application;
 import co.edu.unal.Reto5.SpringContext;
 import co.edu.unal.Reto5.modelos.Pelicula;
 import co.edu.unal.Reto5.modelos.Serie;
-import co.edu.unal.Reto5.modelos.Usuario;
+import co.edu.unal.Reto5.repositorios.RepositorioContenidos;
 import co.edu.unal.Reto5.repositorios.RepositorioPelicula;
 import co.edu.unal.Reto5.repositorios.RepositorioSerie;
 import co.edu.unal.Reto5.repositorios.RepositorioUsuario;
-import java.beans.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
+import java.util.Set;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -38,32 +32,9 @@ public class RedflixForm extends javax.swing.JFrame {
     RepositorioSerie repositorioSerie;
     RepositorioPelicula repositorioPelicula;
     RepositorioUsuario repositorioUsuario;
+    RepositorioContenidos repositorioContenidos;
     
-    public static final String dbURL = "jdbc:mysql://localhost:3306/museo?serverTimezone=UTC";
-    public static final String username = "root";
-    public static final String password = "Valentina4418#";
-    PreparedStatement ps;
-    ResultSet rs;
-    static ResultSet res;
-    private String Error;
-    
-    
-    public static Connection getConnection(){
-        Connection con = null;
-        
-        try {
-            con = (Connection) DriverManager.getConnection(dbURL, username, password);
-            
-                
-        } catch (Exception e) {
-        }
-        return con;
-    }
 
-
-    /**
-     * Creates new form RedflixForm
-     */
     public RedflixForm() {
         initComponents();
         String[] args = {};
@@ -137,6 +108,8 @@ public class RedflixForm extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         RadioRegistrarSer = new javax.swing.JRadioButton();
         RadioActualizarSer = new javax.swing.JRadioButton();
+        BuscarSeries = new javax.swing.JButton();
+        ActualizarSeries = new javax.swing.JButton();
         BusquedaInterface = new javax.swing.JPanel();
         LabelBusqueda = new javax.swing.JLabel();
         IngresoBusqueda = new javax.swing.JTextField();
@@ -671,6 +644,20 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
+        BuscarSeries.setText("Buscar");
+        BuscarSeries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarSeriesActionPerformed(evt);
+            }
+        });
+
+        ActualizarSeries.setText("Actualizar");
+        ActualizarSeries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarSeriesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SeriesInterfaceLayout = new javax.swing.GroupLayout(SeriesInterface);
         SeriesInterface.setLayout(SeriesInterfaceLayout);
         SeriesInterfaceLayout.setHorizontalGroup(
@@ -686,8 +673,12 @@ public class RedflixForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(AceptarSeries)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CancelarSeries)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                        .addComponent(CancelarSeries)
+                        .addGap(18, 18, 18)
+                        .addComponent(BuscarSeries)
+                        .addGap(18, 18, 18)
+                        .addComponent(ActualizarSeries)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         SeriesInterfaceLayout.setVerticalGroup(
             SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -701,7 +692,9 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AceptarSeries)
-                    .addComponent(CancelarSeries))
+                    .addComponent(CancelarSeries)
+                    .addComponent(BuscarSeries)
+                    .addComponent(ActualizarSeries))
                 .addGap(60, 60, 60))
         );
 
@@ -947,6 +940,7 @@ public class RedflixForm extends javax.swing.JFrame {
 
     private void AceptarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarSeriesActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_AceptarSeriesActionPerformed
 
     private void CancelarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarSeriesActionPerformed
@@ -981,57 +975,6 @@ public class RedflixForm extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         
-
-        if (RadioSerBus.isSelected()) {
-            String buscarTitulo = IngresoBusqueda.getText();
-            int id = Integer.parseInt(jtID.getText());
-            //Optional<Serie> OpcionSerietitulo = repositorioSerie.findByTitulo(buscarTitulo);
-            Optional<Serie> optionalSerie = repositorioSerie.findById(id);
-
-            if (optionalSerie.isPresent()) {
-                //Serie serie2 = optionalSerietituloget();
-                Serie serie = optionalSerie.get();
-                jltitulo.setText(serie.getTitulo());
-                jlTemporadas.setText(serie.getTemporadas().toString());
-                jlEpisodios.setText(serie.getEpisodios().toString());
-
-                jlTemporadas.setVisible(false);
-                jltitulo.setVisible(false);
-                jlEpisodios.setVisible(false);
-                
-                
-
-                JOptionPane.showMessageDialog(null, "Serie Disponible: " + jltitulo.getText()
-                        + " consta de " + jlEpisodios.getText() + " episodios en "
-                        + jlTemporadas.getText() + " temporadas");
-                
-                jtID.setText("");
-
-            } else {
-                JOptionPane.showMessageDialog(null, "La serie que busca no fue encontrada");
-                jtID.setText("");
-            }
-        }
-//        else if (RadioPelBus.isSelected()) {
-//            String buscarTitulo = IngresoBusqueda.getText();
-//            int id = Integer.parseInt(jtID.getText());
-//            Optional<Pelicula> optionalPelicula = repositorioPelicula.findById(id);
-//
-//            if (optionalPelicula.isPresent()) {
-//                Pelicula pelicula = optionalPelicula.get();
-//                jltitulo.setText(pelicula.getTitulo());
-//                
-//                jlTemporadas.setVisible(false);
-//                jltitulo.setVisible(false);
-//                jlEpisodios.setVisible(false);
-//
-//                JOptionPane.showMessageDialog(null, "La película " + jltitulo.getText()
-//                        + " está disponible");
-//
-//            } else {
-//                JOptionPane.showMessageDialog(null, "La película que busca no fue encontrada");
-//            }
-//        }
         
     }//GEN-LAST:event_BuscarActionPerformed
 
@@ -1069,92 +1012,57 @@ public class RedflixForm extends javax.swing.JFrame {
 
     private void IngresoUsuarioRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoUsuarioRegActionPerformed
         
-        
-        
+      
     }//GEN-LAST:event_IngresoUsuarioRegActionPerformed
 
     private void IngresoUsuarioRegKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoUsuarioRegKeyPressed
         
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-//            Connection con = null;
-//            con = getConnection();
-            String usuario = IngresoUsuarioReg.getText();
-            Usuario optionalUsuario = repositorioUsuario.findByUserName(usuario);
-            JOptionPane.showMessageDialog(null, usuario);
-//            String sql = "SELECT * from Usuario WHERE user_name = '" + usuario + "';";
-//            System.out.println(sql);
-            if(usuario.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Ingrese un usuario", "Error", JOptionPane.ERROR_MESSAGE);
-                IngresoUsuarioReg.setText("");
-                IngresoUsuarioReg.requestFocus();
-            } else {
-                
-//                try {
-//                
-//                    //String sql = "SELECT * from Usuario WHERE user_name = '" + usuario + "';";
-//                    
-//                    //Optional<Usuario> optionalUsuario = repositorioUsuario.findByAlias(usuario);
-//                    
-////                    ps = con.prepareStatement(sql);
-////                    res = ps.executeQuery(sql);
-//
-//                
-//                if (res.equals(usuario)) {
-//                    String alias = (String) res.getObject("user_name");
-//                    JOptionPane.showMessageDialog(null, alias);
-//                    String nombre = (String) res.getObject("nombre_user");
-//                    IngresoNombreReg.setText(nombre);
-//                    String apellido = (String) res.getObject("apellido_user");
-//                    IngresoApellidoReg.setText(apellido);
-//                    String email = (String) res.getObject("email");
-//                    IngresoEmailReg.setText(email);
-//                    //JOptionPane.showMessageDialog(null, "El usuario buscado fue encontrado");
-//                //} else {
-//                    //JOptionPane.showMessageDialog(null, "El usuario buscado no fue encontrado");
-//
-//                }
-//
-//                 Error = null;
-//                 
-//            }catch(SQLException e){
-//                Error = e.getMessage();
-//            }
-            
-            }
-        }
-           
-
     }//GEN-LAST:event_IngresoUsuarioRegKeyPressed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        Connection con = null;
+
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void BuscarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSeriesActionPerformed
         
+        String titulo = IngresoTituloSerReg.getText().toString();
         try {
-            con = getConnection();
-            ps = con.prepareStatement("SELECT * from Usuario WHERE nombre_user = ?");
-            ps.setString(1, IngresoUsuarioReg.getText());
-            
-            rs= ps.executeQuery();
-            
-            String alias = (String) rs.getObject("user_name");     
-            JOptionPane.showMessageDialog(null, alias);
-            String nombre = (String) rs.getObject("nombre_user");     
-            IngresoNombreReg.setText(nombre);
-            String apellido = (String) rs.getObject("apellido_user");  
-            IngresoApellidoReg.setText(apellido);
-            String email = (String) rs.getObject("email");
-            IngresoEmailReg.setText(email);
-            //JOptionPane.showMessageDialog(null, "El usuario buscado fue encontrado");
-                
-            
-            //JOptionPane.showMessageDialog(null, "El usuario buscado no fue encontrado");
-                
-            Error = null;
+            Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
+            String BuscarTitulo = optionalSerie.getTitulo().toString();
+            if (BuscarTitulo.equals(titulo)) {
+                JOptionPane.showMessageDialog(null, "Serie disponible: " + BuscarTitulo
+                        + " consta de " + optionalSerie.getEpisodios() + " episodios en "
+                        + optionalSerie.getTemporadas() + " temporadas");
+                IngresoEpisodiosSerReg.setText(optionalSerie.getEpisodios().toString());
+                IngresoTemporadasSerReg.setText(optionalSerie.getTemporadas().toString());
+            }
             
         } catch (Exception e) {
-            Error = e.getMessage();
+            JOptionPane.showMessageDialog(null, "La serie no fue encontrada");
+            IngresoTituloSerReg.setText("");
         }
-    }//GEN-LAST:event_jbBuscarActionPerformed
+        
+    }//GEN-LAST:event_BuscarSeriesActionPerformed
+
+    private void ActualizarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarSeriesActionPerformed
+        
+        String titulo = IngresoTituloSerReg.getText().toString();
+        Long temporadas = Long.parseLong(IngresoTemporadasSerReg.getText());
+        Long episodios = Long.parseLong(IngresoEpisodiosSerReg.getText());
+        try {
+            Serie serie = repositorioSerie.findByTitulo(titulo);
+            serie.setTemporadas(temporadas);
+            serie.setEpisodios(episodios);
+            serie = repositorioSerie.save(serie);
+            JOptionPane.showMessageDialog(null, "Los cambios fueron guardados con éxito");
+            IngresoTituloSerReg.setText("");
+            IngresoTemporadasSerReg.setText("");
+            IngresoEpisodiosSerReg.setText("");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
+        }
+        
+    }//GEN-LAST:event_ActualizarSeriesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1199,10 +1107,12 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JButton Aceptar;
     private javax.swing.JButton AceptarPeliculas;
     private javax.swing.JButton AceptarSeries;
+    private javax.swing.JButton ActualizarSeries;
     private javax.swing.JButton AgregarPelicula;
     private javax.swing.JButton AgregarSerie;
     private javax.swing.JButton AgregarUsuario;
     private javax.swing.JButton Buscar;
+    private javax.swing.JButton BuscarSeries;
     private javax.swing.JButton Busqueda;
     private javax.swing.JPanel BusquedaInterface;
     private javax.swing.JButton Cancelar;
@@ -1270,12 +1180,5 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtID;
     // End of variables declaration//GEN-END:variables
 
-    public String getError() {
-        return this.Error;
-    }
-    
-    public ResultSet getresultado(){
-        return this.rs;
-    }
-
+   
 }
