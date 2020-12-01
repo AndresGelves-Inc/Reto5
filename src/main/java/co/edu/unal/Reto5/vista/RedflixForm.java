@@ -52,6 +52,7 @@ public class RedflixForm extends javax.swing.JFrame {
     private void initComponents() {
 
         GrupoBotonesUsuario = new javax.swing.ButtonGroup();
+        BuscarSeries1 = new javax.swing.JButton();
         RedflixPanel = new javax.swing.JTabbedPane();
         Inicio = new javax.swing.JPanel();
         Intro = new javax.swing.JLabel();
@@ -110,6 +111,8 @@ public class RedflixForm extends javax.swing.JFrame {
         RadioActualizarSer = new javax.swing.JRadioButton();
         BuscarSeries = new javax.swing.JButton();
         ActualizarSeries = new javax.swing.JButton();
+        Registrar = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
         BusquedaInterface = new javax.swing.JPanel();
         LabelBusqueda = new javax.swing.JLabel();
         IngresoBusqueda = new javax.swing.JTextField();
@@ -128,6 +131,13 @@ public class RedflixForm extends javax.swing.JFrame {
 
         GrupoBotonesUsuario.add(RadioRegistrarUsu);
         GrupoBotonesUsuario.add(RadioActualizarUsu);
+
+        BuscarSeries1.setText("Buscar");
+        BuscarSeries1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarSeries1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 400));
@@ -296,7 +306,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addComponent(LabelContrasena)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IngresoContrasenaReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         RadioRegistrarUsu.setText("Registrar");
@@ -456,7 +466,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addComponent(LabelDirectorPelReg)
                 .addGap(1, 1, 1)
                 .addComponent(IngresoDirectorPelReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         RadioRegistrarPel.setText("Registrar");
@@ -658,43 +668,71 @@ public class RedflixForm extends javax.swing.JFrame {
             }
         });
 
+        Registrar.setText("Registrar");
+        Registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarActionPerformed(evt);
+            }
+        });
+
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SeriesInterfaceLayout = new javax.swing.GroupLayout(SeriesInterface);
         SeriesInterface.setLayout(SeriesInterfaceLayout);
         SeriesInterfaceLayout.setHorizontalGroup(
             SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SeriesInterfaceLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BuscarSeries))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SeriesInterfaceLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RegistroSeries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(RegistroSeries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeriesInterfaceLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(AceptarSeries))
+                            .addGroup(SeriesInterfaceLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(CancelarSeries))))
                     .addGroup(SeriesInterfaceLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(AceptarSeries)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CancelarSeries)
+                        .addComponent(ActualizarSeries)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Registrar)
                         .addGap(18, 18, 18)
-                        .addComponent(BuscarSeries)
-                        .addGap(18, 18, 18)
-                        .addComponent(ActualizarSeries)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                        .addComponent(Eliminar)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         SeriesInterfaceLayout.setVerticalGroup(
             SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SeriesInterfaceLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RegistroSeries, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeriesInterfaceLayout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92)))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addGroup(SeriesInterfaceLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RegistroSeries, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeriesInterfaceLayout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(92, 92, 92)))
+                        .addGap(18, 18, Short.MAX_VALUE))
+                    .addGroup(SeriesInterfaceLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(AceptarSeries)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CancelarSeries)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AceptarSeries)
-                    .addComponent(CancelarSeries)
                     .addComponent(BuscarSeries)
-                    .addComponent(ActualizarSeries))
+                    .addComponent(ActualizarSeries)
+                    .addComponent(Registrar)
+                    .addComponent(Eliminar))
                 .addGap(60, 60, 60))
         );
 
@@ -1064,6 +1102,35 @@ public class RedflixForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ActualizarSeriesActionPerformed
 
+    private void BuscarSeries1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSeries1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarSeries1ActionPerformed
+
+    private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RegistrarActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+      
+        String titulo = IngresoTituloSerReg.getText().toString();
+        try {
+            Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
+            String BuscarTitulo = optionalSerie.getTitulo().toString();
+            if (BuscarTitulo.equals(titulo)) {
+                int id_serie = optionalSerie.getId();
+                repositorioSerie.deleteById(id_serie);
+                JOptionPane.showMessageDialog(null, "La serie \"" + titulo + "\" ha sido eliminada exitosamente.");
+                IngresoTituloSerReg.setText("");
+                IngresoEpisodiosSerReg.setText("");
+                IngresoTemporadasSerReg.setText("");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La serie no fue encontrada");
+            IngresoTituloSerReg.setText("");
+        }
+    }//GEN-LAST:event_EliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1113,12 +1180,14 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JButton AgregarUsuario;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton BuscarSeries;
+    private javax.swing.JButton BuscarSeries1;
     private javax.swing.JButton Busqueda;
     private javax.swing.JPanel BusquedaInterface;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton CancelarBusqueda;
     private javax.swing.JButton CancelarPeliculas;
     private javax.swing.JButton CancelarSeries;
+    private javax.swing.JButton Eliminar;
     private javax.swing.JRadioButton EliminarPel;
     private javax.swing.ButtonGroup GrupoBotonesUsuario;
     private javax.swing.JLabel Imagen;
@@ -1161,6 +1230,7 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton RadioRegistrarUsu;
     private javax.swing.JRadioButton RadioSerBus;
     private javax.swing.JTabbedPane RedflixPanel;
+    private javax.swing.JButton Registrar;
     private javax.swing.JPanel RegistroPeliculas;
     private javax.swing.JPanel RegistroSeries;
     private javax.swing.JPanel RegistroUsuarios;
