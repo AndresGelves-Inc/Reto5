@@ -10,6 +10,7 @@ import co.edu.unal.Reto5.Reto5Application;
 import co.edu.unal.Reto5.SpringContext;
 import co.edu.unal.Reto5.modelos.Pelicula;
 import co.edu.unal.Reto5.modelos.Serie;
+import co.edu.unal.Reto5.modelos.Usuario;
 import co.edu.unal.Reto5.repositorios.RepositorioPelicula;
 import co.edu.unal.Reto5.repositorios.RepositorioSerie;
 import co.edu.unal.Reto5.repositorios.RepositorioUsuario;
@@ -28,6 +29,7 @@ public class RedflixForm extends javax.swing.JFrame {
     RepositorioPelicula repositorioPelicula;
     RepositorioUsuario repositorioUsuario;
     
+    
 
     public RedflixForm() {
         initComponents();
@@ -35,6 +37,7 @@ public class RedflixForm extends javax.swing.JFrame {
         Reto5Application.runSpringServer(args);
         repositorioSerie = SpringContext.getBean(RepositorioSerie.class);
         repositorioPelicula = SpringContext.getBean(RepositorioPelicula.class);
+        repositorioUsuario = SpringContext.getBean(RepositorioUsuario.class);
         
     }
 
@@ -514,8 +517,6 @@ public class RedflixForm extends javax.swing.JFrame {
 
         jLabel6.setText("Contraseña:");
 
-        IngresoUsuarioPass.setText("jPasswordField1");
-
         javax.swing.GroupLayout RegistroUsuarioLayout = new javax.swing.GroupLayout(RegistroUsuario);
         RegistroUsuario.setLayout(RegistroUsuarioLayout);
         RegistroUsuarioLayout.setHorizontalGroup(
@@ -531,10 +532,10 @@ public class RedflixForm extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 277, Short.MAX_VALUE))
                     .addComponent(IngresoUsuarioNombres)
                     .addComponent(IngresoUsuarioEmail)
-                    .addComponent(IngresoUsuarioPass, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                    .addComponent(IngresoUsuarioPass)
                     .addComponent(IngresoUserName))
                 .addContainerGap())
         );
@@ -565,6 +566,11 @@ public class RedflixForm extends javax.swing.JFrame {
         );
 
         BuscarUsuario.setText("Buscar");
+        BuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarUsuarioActionPerformed(evt);
+            }
+        });
 
         ActualizarUsuario.setText("Actualizar");
 
@@ -886,6 +892,33 @@ public class RedflixForm extends javax.swing.JFrame {
     private void IraUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IraUsuariosActionPerformed
         RedflixPanel.setSelectedIndex(3);
     }//GEN-LAST:event_IraUsuariosActionPerformed
+
+    private void BuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarUsuarioActionPerformed
+        String user_id = IngresoUserName.getText();
+        try {
+            Usuario optionalUsuario = repositorioUsuario.findByUserName(user_id);
+            String BuscarUsuario = optionalUsuario.getUserName();
+            if (BuscarUsuario.equals(user_id)) {
+                JOptionPane.showMessageDialog(null, "El usuario se encuentra registrado: " + BuscarUsuario
+                    + ", Nombre: " + optionalUsuario.getNombre_user()+ ", Apellidos: "
+                    + optionalUsuario.getApellido_user());
+
+                IngresoUserName.setText(optionalUsuario.getUserName());
+                IngresoUsuarioNombres.setText(optionalUsuario.getNombre_user());
+                IngresoUsuarioApellido.setText(optionalUsuario.getApellido_user());
+                IngresoUsuarioEmail.setText(optionalUsuario.getEmail());
+                IngresoUsuarioPass.setText(optionalUsuario.getContrasenia());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El usuario no se encuentra registrado");
+            IngresoUserName.setText("");
+            IngresoUsuarioNombres.setText("");
+            IngresoUsuarioApellido.setText("");
+            IngresoUsuarioEmail.setText("");
+            IngresoUsuarioPass.setText("");
+        }
+    }//GEN-LAST:event_BuscarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

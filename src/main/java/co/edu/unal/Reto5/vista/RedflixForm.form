@@ -689,11 +689,11 @@
                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="277" max="32767" attributes="0"/>
                               </Group>
                               <Component id="IngresoUsuarioNombres" alignment="0" max="32767" attributes="0"/>
                               <Component id="IngresoUsuarioEmail" alignment="0" max="32767" attributes="0"/>
-                              <Component id="IngresoUsuarioPass" alignment="0" pref="369" max="32767" attributes="0"/>
+                              <Component id="IngresoUsuarioPass" alignment="0" max="32767" attributes="0"/>
                               <Component id="IngresoUserName" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -763,9 +763,6 @@
                 <Component class="javax.swing.JTextField" name="IngresoUsuarioNombres">
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="IngresoUsuarioPass">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -773,6 +770,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarUsuarioActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ActualizarUsuario">
               <Properties>
