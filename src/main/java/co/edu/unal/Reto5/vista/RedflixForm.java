@@ -573,6 +573,11 @@ public class RedflixForm extends javax.swing.JFrame {
         });
 
         ActualizarUsuario.setText("Actualizar");
+        ActualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarUsuarioActionPerformed(evt);
+            }
+        });
 
         RegistrarUsuario.setText("Registrar");
 
@@ -919,6 +924,33 @@ public class RedflixForm extends javax.swing.JFrame {
             IngresoUsuarioPass.setText("");
         }
     }//GEN-LAST:event_BuscarUsuarioActionPerformed
+
+    private void ActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarUsuarioActionPerformed
+        String user_id = IngresoUserName.getText();
+        try {
+            Usuario optionalUsuario = repositorioUsuario.findByUserName(user_id);
+            String BuscarUsuario = optionalUsuario.getUserName();
+            if (BuscarUsuario.equals(user_id)) {
+                Usuario usuario = repositorioUsuario.findByUserName(user_id);
+                usuario.setUserName(IngresoUserName.getText());
+                usuario.setNombre_user(IngresoUsuarioNombres.getText());
+                usuario.setApellido_user(IngresoUsuarioApellido.getText());
+                usuario.setEmail(IngresoUsuarioEmail.getText());
+                usuario.setContrasenia(IngresoUsuarioPass.getText());
+                usuario = repositorioUsuario.save(usuario);
+                JOptionPane.showMessageDialog(null, "El usuario \"" + user_id +"\" ha sido actualizado con éxito.");
+                IngresoUserName.setText("");
+            IngresoUsuarioNombres.setText("");
+            IngresoUsuarioApellido.setText("");
+            IngresoUsuarioEmail.setText("");
+            IngresoUsuarioPass.setText("");
+            }
+        }
+
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
+        }
+    }//GEN-LAST:event_ActualizarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
