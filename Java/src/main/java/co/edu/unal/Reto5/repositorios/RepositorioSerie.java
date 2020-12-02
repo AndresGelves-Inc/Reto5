@@ -14,5 +14,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author malej
  */
 public interface RepositorioSerie extends CrudRepository<Serie, Integer> {
-    
+    Serie findByTitulo (String titulo); 
 }

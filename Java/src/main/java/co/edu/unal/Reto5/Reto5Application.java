@@ -1,12 +1,9 @@
 package co.edu.unal.Reto5;
 
 
-import co.edu.unal.Reto5.vista.Ventana;
+
 import co.edu.unal.Reto5.vista.RedflixForm;
-import co.edu.unal.Reto5.repositorios.RepositorioContenidos;
-import co.edu.unal.Reto5.repositorios.RepositorioDirector;
 import co.edu.unal.Reto5.repositorios.RepositorioPelicula;
-import co.edu.unal.Reto5.repositorios.RepositorioRegistro_tranms;
 import co.edu.unal.Reto5.repositorios.RepositorioSerie;
 import co.edu.unal.Reto5.repositorios.RepositorioUsuario;
 import org.apache.commons.logging.Log;
@@ -42,18 +39,13 @@ public class Reto5Application {
         }
          
      @Bean
-    ApplicationRunner applicationRunner(RepositorioContenidos repositorioContenidos, RepositorioDirector repositorioDirector, RepositorioPelicula repositorioPelicula, RepositorioRegistro_tranms repositorioRegistro_transm, RepositorioSerie repositorioSerie, RepositorioUsuario repositorioUsuario ) {
+    ApplicationRunner applicationRunner( RepositorioPelicula repositorioPelicula, RepositorioSerie repositorioSerie, RepositorioUsuario repositorioUsuario ) {
         return (ApplicationArguments args) -> {
 
-            final Log logger = LogFactory.getLog(getClass());
-
-            logger.info("Contenidos: " + repositorioContenidos.count());
-            logger.info("Director: " + repositorioDirector.count());
+            final Log logger = LogFactory.getLog(getClass());           
+           
             logger.info("Serie: " + repositorioSerie.findAll());
-            logger.info("Pelicula: " + repositorioPelicula.findAll());
-            logger.info("Contenidos: " + repositorioContenidos.findAll());
-            logger.info("Registros de transmision: " + repositorioRegistro_transm.findAll());
-            logger.info("Directores: " + repositorioDirector.findAll());
+            logger.info("Pelicula: " + repositorioPelicula.findAll());                 
             logger.info("Usuario: " + repositorioUsuario.findAll());
         };
     }
