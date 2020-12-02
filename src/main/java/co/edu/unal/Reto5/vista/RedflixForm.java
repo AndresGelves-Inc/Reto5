@@ -580,6 +580,11 @@ public class RedflixForm extends javax.swing.JFrame {
         });
 
         RegistrarUsuario.setText("Registrar");
+        RegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarUsuarioActionPerformed(evt);
+            }
+        });
 
         EliminarUsuario.setText("Eliminar");
         EliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -626,8 +631,8 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGroup(UsuarioInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BuscarUsuario)
                     .addComponent(ActualizarUsuario)
-                    .addComponent(RegistrarUsuario)
-                    .addComponent(EliminarUsuario))
+                    .addComponent(EliminarUsuario)
+                    .addComponent(RegistrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(VolverInicioUsuario)
                 .addContainerGap(78, Short.MAX_VALUE))
@@ -954,6 +959,11 @@ public class RedflixForm extends javax.swing.JFrame {
 
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
+            IngresoUserName.setText("");
+            IngresoUsuarioNombres.setText("");
+            IngresoUsuarioApellido.setText("");
+            IngresoUsuarioEmail.setText("");
+            IngresoUsuarioPass.setText("");
         }
     }//GEN-LAST:event_ActualizarUsuarioActionPerformed
 
@@ -975,10 +985,45 @@ public class RedflixForm extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "El usuario no se encuentra registrado");
-            IngresoTituloSerReg.setText("");
+            IngresoUserName.setText("");
+            IngresoUsuarioNombres.setText("");
+            IngresoUsuarioApellido.setText("");
+            IngresoUsuarioEmail.setText("");
+            IngresoUsuarioPass.setText("");
         }
     }//GEN-LAST:event_EliminarUsuarioActionPerformed
 
+    private void RegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarUsuarioActionPerformed
+        String user_id = IngresoUserName.getText();
+        Usuario optionalUsuario = repositorioUsuario.findByUserName(user_id);
+        String BuscarUsuario = optionalUsuario.getUserName();
+        
+         if (BuscarUsuario.equals(user_id)) {
+             JOptionPane.showMessageDialog(null, "El usuario ya existe");
+             IngresoUserName.setText("");
+             IngresoUsuarioNombres.setText("");
+             IngresoUsuarioApellido.setText("");
+             IngresoUsuarioEmail.setText("");
+             IngresoUsuarioPass.setText("");
+         }
+            
+         else if (optionalUsuario == null){
+            Usuario newUsuario = new Usuario();
+            newUsuario.setUserName(user_id);
+            newUsuario.setNombre_user(IngresoUsuarioNombres.getText());
+            newUsuario.setApellido_user(IngresoUsuarioApellido.getText());
+            newUsuario.setEmail(IngresoUsuarioEmail.getText());
+            newUsuario.setContrasenia(IngresoUsuarioPass.getText());             
+            repositorioUsuario.save(newUsuario);
+            JOptionPane.showMessageDialog(null, "Se registró correctamente el usuario: \"" + user_id + "\"");
+            IngresoUserName.setText("");
+            IngresoUsuarioNombres.setText("");
+            IngresoUsuarioApellido.setText("");
+            IngresoUsuarioEmail.setText("");
+            IngresoUsuarioPass.setText("");
+        } 
+    }//GEN-LAST:event_RegistrarUsuarioActionPerformed
+    
     /**
      * @param args the command line arguments
      */

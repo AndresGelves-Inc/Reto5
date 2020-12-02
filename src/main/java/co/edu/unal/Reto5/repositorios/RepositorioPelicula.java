@@ -7,6 +7,7 @@ package co.edu.unal.Reto5.repositorios;
 
 
 import co.edu.unal.Reto5.modelos.Pelicula;
+import co.edu.unal.Reto5.modelos.Usuario;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
