@@ -55,6 +55,7 @@ public class RedflixForm extends javax.swing.JFrame {
         AgregarSerie = new javax.swing.JButton();
         AgregarPelicula = new javax.swing.JButton();
         Imagen = new javax.swing.JLabel();
+        IraUsuarios = new javax.swing.JButton();
         SeriesInterface = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         BuscarSeries = new javax.swing.JButton();
@@ -86,6 +87,23 @@ public class RedflixForm extends javax.swing.JFrame {
         RegistrarPeliculas = new javax.swing.JButton();
         EliminarPeliculas = new javax.swing.JButton();
         InicioPelicula = new javax.swing.JButton();
+        UsuarioInterface = new javax.swing.JPanel();
+        RegistroUsuario = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        IngresoUsuarioEmail = new javax.swing.JTextField();
+        IngresoUserName = new javax.swing.JTextField();
+        IngresoUsuarioApellido = new javax.swing.JTextField();
+        IngresoUsuarioNombres = new javax.swing.JTextField();
+        IngresoUsuarioPass = new javax.swing.JPasswordField();
+        BuscarUsuario = new javax.swing.JButton();
+        ActualizarUsuario = new javax.swing.JButton();
+        RegistrarUsuario = new javax.swing.JButton();
+        EliminarUsuario = new javax.swing.JButton();
+        VolverInicioUsuario = new javax.swing.JButton();
 
         BuscarSeries1.setText("Buscar");
         BuscarSeries1.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +114,6 @@ public class RedflixForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Redflix");
-        setMaximumSize(new java.awt.Dimension(500, 500));
         setMinimumSize(new java.awt.Dimension(400, 400));
 
         RedflixPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de búsqueda"));
@@ -123,6 +140,13 @@ public class RedflixForm extends javax.swing.JFrame {
         Imagen.setMaximumSize(new java.awt.Dimension(100, 100));
         Imagen.setMinimumSize(new java.awt.Dimension(50, 50));
 
+        IraUsuarios.setText("Usuarios");
+        IraUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IraUsuariosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout InicioLayout = new javax.swing.GroupLayout(Inicio);
         Inicio.setLayout(InicioLayout);
         InicioLayout.setHorizontalGroup(
@@ -135,9 +159,11 @@ public class RedflixForm extends javax.swing.JFrame {
                     .addGroup(InicioLayout.createSequentialGroup()
                         .addComponent(AgregarSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AgregarPelicula))
+                        .addComponent(AgregarPelicula)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(IraUsuarios))
                     .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         InicioLayout.setVerticalGroup(
             InicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,8 +176,9 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(InicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AgregarPelicula)
-                    .addComponent(AgregarSerie))
-                .addContainerGap(205, Short.MAX_VALUE))
+                    .addComponent(AgregarSerie)
+                    .addComponent(IraUsuarios))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
 
         RedflixPanel.addTab("Inicio", Inicio);
@@ -263,7 +290,7 @@ public class RedflixForm extends javax.swing.JFrame {
                             .addComponent(LabelTemporadaSerReg)
                             .addComponent(LabelTituloSerReg)
                             .addComponent(LabelEpisodiosSerReg))
-                        .addGap(0, 307, Short.MAX_VALUE))
+                        .addGap(0, 305, Short.MAX_VALUE))
                     .addComponent(IngresoTemporadasSerReg)
                     .addComponent(IngresoEpisodiosSerReg)
                     .addComponent(IngresoTituloSerReg))
@@ -293,12 +320,10 @@ public class RedflixForm extends javax.swing.JFrame {
             SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SeriesInterfaceLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeriesInterfaceLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RegistroSeries, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RegistroSeries, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         SeriesInterfaceLayout.setVerticalGroup(
             SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,7 +375,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGroup(RegistroPeliculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(IngresoFechaPelReg)
                     .addComponent(IngresoDirectorPelReg, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                     .addComponent(IngresoTituloPelReg)
                     .addGroup(RegistroPeliculasLayout.createSequentialGroup()
                         .addGroup(RegistroPeliculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,8 +395,8 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addComponent(IngresoTituloPelReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelResumenPelReg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                 .addGap(4, 4, 4)
                 .addComponent(LabelFechaPelReg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -460,12 +485,10 @@ public class RedflixForm extends javax.swing.JFrame {
             PeliculasInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PeliculasInterfaceLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(RegistroPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PeliculasInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RegistroPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PeliculasInterfaceLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         PeliculasInterfaceLayout.setVerticalGroup(
             PeliculasInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,6 +501,127 @@ public class RedflixForm extends javax.swing.JFrame {
         );
 
         RedflixPanel.addTab("Películas", PeliculasInterface);
+
+        RegistroUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro"));
+
+        jLabel2.setText("Username:");
+
+        jLabel3.setText("Correo Electrónico:");
+
+        jLabel4.setText("Nombres: ");
+
+        jLabel5.setText("Apellidos:");
+
+        jLabel6.setText("Contraseña:");
+
+        IngresoUsuarioPass.setText("jPasswordField1");
+
+        javax.swing.GroupLayout RegistroUsuarioLayout = new javax.swing.GroupLayout(RegistroUsuario);
+        RegistroUsuario.setLayout(RegistroUsuarioLayout);
+        RegistroUsuarioLayout.setHorizontalGroup(
+            RegistroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RegistroUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(RegistroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IngresoUsuarioApellido)
+                    .addGroup(RegistroUsuarioLayout.createSequentialGroup()
+                        .addGroup(RegistroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(IngresoUsuarioNombres)
+                    .addComponent(IngresoUsuarioEmail)
+                    .addComponent(IngresoUsuarioPass, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                    .addComponent(IngresoUserName))
+                .addContainerGap())
+        );
+        RegistroUsuarioLayout.setVerticalGroup(
+            RegistroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RegistroUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IngresoUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IngresoUsuarioPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IngresoUsuarioEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IngresoUsuarioNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IngresoUsuarioApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        BuscarUsuario.setText("Buscar");
+
+        ActualizarUsuario.setText("Actualizar");
+
+        RegistrarUsuario.setText("Registrar");
+
+        EliminarUsuario.setText("Eliminar");
+
+        VolverInicioUsuario.setText("Volver a Inicio");
+        VolverInicioUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverInicioUsuarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout UsuarioInterfaceLayout = new javax.swing.GroupLayout(UsuarioInterface);
+        UsuarioInterface.setLayout(UsuarioInterfaceLayout);
+        UsuarioInterfaceLayout.setHorizontalGroup(
+            UsuarioInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UsuarioInterfaceLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(RegistroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(UsuarioInterfaceLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(UsuarioInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(VolverInicioUsuario)
+                    .addGroup(UsuarioInterfaceLayout.createSequentialGroup()
+                        .addComponent(BuscarUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(ActualizarUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(RegistrarUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(EliminarUsuario)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        UsuarioInterfaceLayout.setVerticalGroup(
+            UsuarioInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UsuarioInterfaceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(RegistroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(UsuarioInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BuscarUsuario)
+                    .addComponent(ActualizarUsuario)
+                    .addComponent(RegistrarUsuario)
+                    .addComponent(EliminarUsuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(VolverInicioUsuario)
+                .addContainerGap(78, Short.MAX_VALUE))
+        );
+
+        RegistroUsuario.getAccessibleContext().setAccessibleName("Registro");
+
+        RedflixPanel.addTab("Usuarios", UsuarioInterface);
+        UsuarioInterface.getAccessibleContext().setAccessibleName("UsuarioInterface");
+        UsuarioInterface.getAccessibleContext().setAccessibleParent(Inicio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -735,6 +879,14 @@ public class RedflixForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_IngresoTituloPelRegKeyTyped
 
+    private void VolverInicioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverInicioUsuarioActionPerformed
+       RedflixPanel.setSelectedIndex(0);
+    }//GEN-LAST:event_VolverInicioUsuarioActionPerformed
+
+    private void IraUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IraUsuariosActionPerformed
+        RedflixPanel.setSelectedIndex(3);
+    }//GEN-LAST:event_IraUsuariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -777,43 +929,71 @@ public class RedflixForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ActualizarPeliculas;
     private javax.swing.JButton ActualizarSeries;
+    private javax.swing.JButton ActualizarUsuario;
     private javax.swing.JButton AgregarPelicula;
     private javax.swing.JButton AgregarSerie;
     private javax.swing.JButton BuscarPelículas;
     private javax.swing.JButton BuscarSeries;
     private javax.swing.JButton BuscarSeries1;
+    private javax.swing.JButton BuscarUsuario;
     private javax.swing.JButton EliminarPeliculas;
     private javax.swing.JButton EliminarSeries;
+    private javax.swing.JButton EliminarUsuario;
     private javax.swing.JLabel Imagen;
     private javax.swing.JTextField IngresoDirectorPelReg;
+    private javax.swing.JTextField IngresoDirectorPelReg1;
     private javax.swing.JTextField IngresoEpisodiosSerReg;
     private javax.swing.JTextField IngresoFechaPelReg;
+    private javax.swing.JTextField IngresoFechaPelReg1;
     private javax.swing.JTextArea IngresoResumenPelReg;
+    private javax.swing.JTextArea IngresoResumenPelReg1;
     private javax.swing.JTextField IngresoTemporadasSerReg;
     private javax.swing.JTextField IngresoTituloPelReg;
+    private javax.swing.JTextField IngresoTituloPelReg1;
     private javax.swing.JTextField IngresoTituloSerReg;
+    private javax.swing.JTextField IngresoUserName;
+    private javax.swing.JTextField IngresoUsuarioApellido;
+    private javax.swing.JTextField IngresoUsuarioEmail;
+    private javax.swing.JTextField IngresoUsuarioNombres;
+    private javax.swing.JPasswordField IngresoUsuarioPass;
     private javax.swing.JPanel Inicio;
     private javax.swing.JButton InicioPelicula;
     private javax.swing.JButton InicioSerie;
     private javax.swing.JLabel Intro;
+    private javax.swing.JButton IraUsuarios;
     private javax.swing.JLabel LabelDirectorPelReg;
+    private javax.swing.JLabel LabelDirectorPelReg1;
     private javax.swing.JLabel LabelEpisodiosSerReg;
     private javax.swing.JLabel LabelFechaPelReg;
+    private javax.swing.JLabel LabelFechaPelReg1;
     private javax.swing.JLabel LabelResumenPelReg;
+    private javax.swing.JLabel LabelResumenPelReg1;
     private javax.swing.JLabel LabelTemporadaSerReg;
     private javax.swing.JLabel LabelTituloPelReg;
+    private javax.swing.JLabel LabelTituloPelReg1;
     private javax.swing.JLabel LabelTituloSerReg;
     private javax.swing.JPanel PeliculasInterface;
     private javax.swing.JTabbedPane RedflixPanel;
     private javax.swing.JButton RegistrarPeliculas;
     private javax.swing.JButton RegistrarSeries;
+    private javax.swing.JButton RegistrarUsuario;
     private javax.swing.JPanel RegistroPeliculas;
+    private javax.swing.JPanel RegistroPeliculas1;
     private javax.swing.JPanel RegistroSeries;
+    private javax.swing.JPanel RegistroUsuario;
     private javax.swing.JPanel SeriesInterface;
+    private javax.swing.JPanel UsuarioInterface;
+    private javax.swing.JButton VolverInicioUsuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
    
