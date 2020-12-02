@@ -15,7 +15,8 @@ create table serie(
     episodios integer
 );
 create table usuario(
-	user_name  char(20) primary key,
+	user_id int NOT NULL AUTO_INCREMENT primary key ,
+	user_name  char(20) ,
     nombre_user  char(25),
     apellido_user char(25),
     email  char(40),
@@ -60,14 +61,14 @@ insert into serie values (5, 'Friends', 10, 236);
 insert into serie values (6, 'Arrow', 8, 170);
 insert into serie values (7, 'The big bang theory', 12, 279);
 insert into serie values (8, 'Vikingos', 6, 79);
-insert into usuario values ('lucky', 'Pedro', 'Perez', 'lucky@gmail.com', 310221122, 'lucky12342', '13-jun-1990');
-insert into usuario values ('malopez', 'Maria', 'Lopez', 'malopez@gmail.com', 312211445, 'malopez123', '01-ene-1987');
-insert into usuario values ('diva', 'Ana', 'Diaz', 'diazana@gmail.com', 3214433282, 'diva321', '15-ago-1993');
-insert into usuario values ('dreamer', 'Luis', 'Rojas', 'luisrojas@gmail.com', 3224433201, 'rojas4321', '22-jul-1991');
-insert into usuario values ('ninja', 'Andres', 'Cruz', 'andres.cruz@gmail.com', 3239955432, 'cruz45543', '30-nov-1994');
-insert into usuario values ('neon', 'Nelson', 'Ruiz', 'ruiznelson@gmail.com', 3004433321, 'nelson2211', '10-may-1979');
-insert into usuario values ('rose', 'Claudia', 'Mendez', 'claumendez@gmail.com', 3043322910, 'claumend211', '02-sep-1992');
-insert into usuario values ('green', 'Jorge', 'Rodriguez', 'jorge.rodri@gmail.com', 3129943321, 'jorsh1234', '29-dic-1987');
+insert into usuario values (1,'lucky', 'Pedro', 'Perez', 'lucky@gmail.com', 310221122, 'lucky12342', '13-jun-1990');
+insert into usuario values (2,'malopez', 'Maria', 'Lopez', 'malopez@gmail.com', 312211445, 'malopez123', '01-ene-1987');
+insert into usuario values (3,'diva', 'Ana', 'Diaz', 'diazana@gmail.com', 3214433282, 'diva321', '15-ago-1993');
+insert into usuario values (4,'dreamer', 'Luis', 'Rojas', 'luisrojas@gmail.com', 3224433201, 'rojas4321', '22-jul-1991');
+insert into usuario values (5,'ninja', 'Andres', 'Cruz', 'andres.cruz@gmail.com', 3239955432, 'cruz45543', '30-nov-1994');
+insert into usuario values (6,'neon', 'Nelson', 'Ruiz', 'ruiznelson@gmail.com', 3004433321, 'nelson2211', '10-may-1979');
+insert into usuario values (7,'rose', 'Claudia', 'Mendez', 'claumendez@gmail.com', 3043322910, 'claumend211', '02-sep-1992');
+insert into usuario values (8,'green', 'Jorge', 'Rodriguez', 'jorge.rodri@gmail.com', 3129943321, 'jorsh1234', '29-dic-1987');
 insert into pelicula values (1, 'Los Vengadores', 'Pelicula de superheroes basada en Marvel Comics. Nick Fury director de SHIELD recluta a Tony Stark, Steve Rogers, Bruce Banner y Thor para forma un equipo y evitar que Loki, hermano de Thor, se apodere de la tierra.', 1990 , 'Joss Whedon');
 insert into pelicula values (2, 'Interestelar', 'Pelicula de ciencia ficción, donde la humanidad lucha por sobrevivir. La pelicula cuenta una historia de un grupo de astronautas que viajan a traves de un agujero de gusano en busca de un nuevo hogar.', 2014 , 'Cristopher Nolan');
 insert into pelicula values (3, 'El viaje de Chihiro', 'Pelicula de animación japonesa. Es la historia de una niña de 12 años, quien se ve atrapada por un mundo mágico y sobrenatural, teniendo como misión buscar su libertad y la de sus padres y regresar al mundo real.', 2001 , 'Hayo Miyazaki');

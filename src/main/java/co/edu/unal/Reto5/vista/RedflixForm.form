@@ -648,11 +648,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="RegistroUsuario" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BuscarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ActualizarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="EliminarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="RegistrarUsuario" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="BuscarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ActualizarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="EliminarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="VolverInicioUsuario" min="-2" max="-2" attributes="0"/>
@@ -670,9 +672,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Registro"/>
-              </AccessibilityProperties>
 
               <Layout>
                 <DimensionLayout dim="0">

@@ -8,6 +8,7 @@ package co.edu.unal.Reto5.modelos;
 
 
 import java.io.Serializable;
+import javax.persistence.GeneratedValue;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -23,6 +24,9 @@ public class Usuario implements Serializable {
 
     
     @Id
+    @GeneratedValue
+    private int user_id;
+    @Column("user_name")
     private String userName;
     //private int idusuario;
     @Column("nombre_user")
@@ -39,6 +43,14 @@ public class Usuario implements Serializable {
     private String fecha_nacimiento;
     //private int registro_transm_idregistro_transm;
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }    
+    
     public String getUserName() {
         return userName;
     }

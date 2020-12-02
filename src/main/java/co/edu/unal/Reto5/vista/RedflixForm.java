@@ -628,17 +628,16 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(RegistroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(UsuarioInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BuscarUsuario)
-                    .addComponent(ActualizarUsuario)
-                    .addComponent(EliminarUsuario)
-                    .addComponent(RegistrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(UsuarioInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(UsuarioInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BuscarUsuario)
+                        .addComponent(ActualizarUsuario)
+                        .addComponent(EliminarUsuario)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(VolverInicioUsuario)
                 .addContainerGap(78, Short.MAX_VALUE))
         );
-
-        RegistroUsuario.getAccessibleContext().setAccessibleName("Registro");
 
         RedflixPanel.addTab("Usuarios", UsuarioInterface);
         UsuarioInterface.getAccessibleContext().setAccessibleName("UsuarioInterface");
@@ -995,19 +994,9 @@ public class RedflixForm extends javax.swing.JFrame {
 
     private void RegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarUsuarioActionPerformed
         String user_id = IngresoUserName.getText();
-        Usuario optionalUsuario = repositorioUsuario.findByUserName(user_id);
-        String BuscarUsuario = optionalUsuario.getUserName();
-        
-         if (BuscarUsuario.equals(user_id)) {
-             JOptionPane.showMessageDialog(null, "El usuario ya existe");
-             IngresoUserName.setText("");
-             IngresoUsuarioNombres.setText("");
-             IngresoUsuarioApellido.setText("");
-             IngresoUsuarioEmail.setText("");
-             IngresoUsuarioPass.setText("");
-         }
+        Usuario optionalUsuario = repositorioUsuario.findByUserName(user_id);           
             
-         else if (optionalUsuario == null){
+         if (optionalUsuario == null){
             Usuario newUsuario = new Usuario();
             newUsuario.setUserName(user_id);
             newUsuario.setNombre_user(IngresoUsuarioNombres.getText());
@@ -1021,7 +1010,16 @@ public class RedflixForm extends javax.swing.JFrame {
             IngresoUsuarioApellido.setText("");
             IngresoUsuarioEmail.setText("");
             IngresoUsuarioPass.setText("");
-        } 
+        } else {
+             
+             JOptionPane.showMessageDialog(null, "El usuario ya existe");
+             IngresoUserName.setText("");
+             IngresoUsuarioNombres.setText("");
+             IngresoUsuarioApellido.setText("");
+             IngresoUsuarioEmail.setText("");
+             IngresoUsuarioPass.setText("");
+         
+         }
     }//GEN-LAST:event_RegistrarUsuarioActionPerformed
     
     /**
@@ -1078,15 +1076,11 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JButton EliminarUsuario;
     private javax.swing.JLabel Imagen;
     private javax.swing.JTextField IngresoDirectorPelReg;
-    private javax.swing.JTextField IngresoDirectorPelReg1;
     private javax.swing.JTextField IngresoEpisodiosSerReg;
     private javax.swing.JTextField IngresoFechaPelReg;
-    private javax.swing.JTextField IngresoFechaPelReg1;
     private javax.swing.JTextArea IngresoResumenPelReg;
-    private javax.swing.JTextArea IngresoResumenPelReg1;
     private javax.swing.JTextField IngresoTemporadasSerReg;
     private javax.swing.JTextField IngresoTituloPelReg;
-    private javax.swing.JTextField IngresoTituloPelReg1;
     private javax.swing.JTextField IngresoTituloSerReg;
     private javax.swing.JTextField IngresoUserName;
     private javax.swing.JTextField IngresoUsuarioApellido;
@@ -1099,15 +1093,11 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JLabel Intro;
     private javax.swing.JButton IraUsuarios;
     private javax.swing.JLabel LabelDirectorPelReg;
-    private javax.swing.JLabel LabelDirectorPelReg1;
     private javax.swing.JLabel LabelEpisodiosSerReg;
     private javax.swing.JLabel LabelFechaPelReg;
-    private javax.swing.JLabel LabelFechaPelReg1;
     private javax.swing.JLabel LabelResumenPelReg;
-    private javax.swing.JLabel LabelResumenPelReg1;
     private javax.swing.JLabel LabelTemporadaSerReg;
     private javax.swing.JLabel LabelTituloPelReg;
-    private javax.swing.JLabel LabelTituloPelReg1;
     private javax.swing.JLabel LabelTituloSerReg;
     private javax.swing.JPanel PeliculasInterface;
     private javax.swing.JTabbedPane RedflixPanel;
@@ -1115,7 +1105,6 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JButton RegistrarSeries;
     private javax.swing.JButton RegistrarUsuario;
     private javax.swing.JPanel RegistroPeliculas;
-    private javax.swing.JPanel RegistroPeliculas1;
     private javax.swing.JPanel RegistroSeries;
     private javax.swing.JPanel RegistroUsuario;
     private javax.swing.JPanel SeriesInterface;
@@ -1130,7 +1119,6 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
    
