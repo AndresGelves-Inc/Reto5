@@ -582,6 +582,11 @@ public class RedflixForm extends javax.swing.JFrame {
         RegistrarUsuario.setText("Registrar");
 
         EliminarUsuario.setText("Eliminar");
+        EliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarUsuarioActionPerformed(evt);
+            }
+        });
 
         VolverInicioUsuario.setText("Volver a Inicio");
         VolverInicioUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -940,10 +945,10 @@ public class RedflixForm extends javax.swing.JFrame {
                 usuario = repositorioUsuario.save(usuario);
                 JOptionPane.showMessageDialog(null, "El usuario \"" + user_id +"\" ha sido actualizado con éxito.");
                 IngresoUserName.setText("");
-            IngresoUsuarioNombres.setText("");
-            IngresoUsuarioApellido.setText("");
-            IngresoUsuarioEmail.setText("");
-            IngresoUsuarioPass.setText("");
+                IngresoUsuarioNombres.setText("");
+                IngresoUsuarioApellido.setText("");
+                IngresoUsuarioEmail.setText("");
+                IngresoUsuarioPass.setText("");
             }
         }
 
@@ -951,6 +956,28 @@ public class RedflixForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
         }
     }//GEN-LAST:event_ActualizarUsuarioActionPerformed
+
+    private void EliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarUsuarioActionPerformed
+       String user_id = IngresoUserName.getText();
+        try {
+            Usuario optionalUsuario = repositorioUsuario.findByUserName(user_id);
+            String BuscarUsuario = optionalUsuario.getUserName();
+             if (BuscarUsuario.equals(user_id)) {
+                repositorioUsuario.delete(optionalUsuario);
+                JOptionPane.showMessageDialog(null, "Se eliminó exitosamente el usuario: \"" + user_id + "\" ");
+                IngresoUserName.setText("");
+                IngresoUsuarioNombres.setText("");
+                IngresoUsuarioApellido.setText("");
+                IngresoUsuarioEmail.setText("");
+                IngresoUsuarioPass.setText("");
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El usuario no se encuentra registrado");
+            IngresoTituloSerReg.setText("");
+        }
+    }//GEN-LAST:event_EliminarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
