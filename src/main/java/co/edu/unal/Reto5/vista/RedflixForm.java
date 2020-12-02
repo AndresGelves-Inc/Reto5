@@ -820,11 +820,16 @@ public class RedflixForm extends javax.swing.JFrame {
                 IngresoTituloSerReg.setText("");
                 IngresoTemporadasSerReg.setText("");
                 IngresoEpisodiosSerReg.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "La serie no se encuentra registrada.");
             }
         }
 
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
+            IngresoTituloSerReg.setText("");
+            IngresoTemporadasSerReg.setText("");
+            IngresoEpisodiosSerReg.setText("");
         }
     }//GEN-LAST:event_ActualizarSeriesActionPerformed
 
