@@ -119,7 +119,6 @@ public class RedflixForm extends javax.swing.JFrame {
             }
         });
 
-        Imagen.setIcon(new javax.swing.ImageIcon("E:\\Felipe\\Documents\\Git\\Reto5\\Redflix.png")); // NOI18N
         Imagen.setText(null);
         Imagen.setMaximumSize(new java.awt.Dimension(100, 100));
         Imagen.setMinimumSize(new java.awt.Dimension(50, 50));
@@ -230,9 +229,27 @@ public class RedflixForm extends javax.swing.JFrame {
 
         LabelTituloSerReg.setText("Título:");
 
+        IngresoTituloSerReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IngresoTituloSerRegKeyTyped(evt);
+            }
+        });
+
         LabelEpisodiosSerReg.setText("Episodios:");
 
+        IngresoEpisodiosSerReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IngresoEpisodiosSerRegKeyTyped(evt);
+            }
+        });
+
         LabelTemporadaSerReg.setText("Temporadas:");
+
+        IngresoTemporadasSerReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IngresoTemporadasSerRegKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout RegistroSeriesLayout = new javax.swing.GroupLayout(RegistroSeries);
         RegistroSeries.setLayout(RegistroSeriesLayout);
@@ -246,7 +263,7 @@ public class RedflixForm extends javax.swing.JFrame {
                             .addComponent(LabelTemporadaSerReg)
                             .addComponent(LabelTituloSerReg)
                             .addComponent(LabelEpisodiosSerReg))
-                        .addGap(0, 289, Short.MAX_VALUE))
+                        .addGap(0, 307, Short.MAX_VALUE))
                     .addComponent(IngresoTemporadasSerReg)
                     .addComponent(IngresoEpisodiosSerReg)
                     .addComponent(IngresoTituloSerReg))
@@ -267,7 +284,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addComponent(LabelTemporadaSerReg)
                 .addGap(3, 3, 3)
                 .addComponent(IngresoTemporadasSerReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout SeriesInterfaceLayout = new javax.swing.GroupLayout(SeriesInterface);
@@ -301,11 +318,23 @@ public class RedflixForm extends javax.swing.JFrame {
 
         LabelTituloPelReg.setText("Título:");
 
+        IngresoTituloPelReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IngresoTituloPelRegKeyTyped(evt);
+            }
+        });
+
         LabelResumenPelReg.setText("Resumen:");
 
         LabelFechaPelReg.setText("Fecha de lanzamiento:");
 
         LabelDirectorPelReg.setText("Director:");
+
+        IngresoFechaPelReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IngresoFechaPelRegKeyTyped(evt);
+            }
+        });
 
         IngresoResumenPelReg.setColumns(20);
         IngresoResumenPelReg.setLineWrap(true);
@@ -321,7 +350,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addGroup(RegistroPeliculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(IngresoFechaPelReg)
                     .addComponent(IngresoDirectorPelReg, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                     .addComponent(IngresoTituloPelReg)
                     .addGroup(RegistroPeliculasLayout.createSequentialGroup()
                         .addGroup(RegistroPeliculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,7 +370,7 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addComponent(IngresoTituloPelReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelResumenPelReg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(LabelFechaPelReg)
@@ -664,6 +693,47 @@ public class RedflixForm extends javax.swing.JFrame {
     private void InicioPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioPeliculaActionPerformed
         RedflixPanel.setSelectedIndex(0);
     }//GEN-LAST:event_InicioPeliculaActionPerformed
+
+    private void IngresoEpisodiosSerRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoEpisodiosSerRegKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Digite solo números");
+        }
+    }//GEN-LAST:event_IngresoEpisodiosSerRegKeyTyped
+
+    private void IngresoTemporadasSerRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoTemporadasSerRegKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Digite solo números");
+        }
+    }//GEN-LAST:event_IngresoTemporadasSerRegKeyTyped
+
+    private void IngresoTituloSerRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoTituloSerRegKeyTyped
+        if(IngresoTituloSerReg.getText().length() >= 45){
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_IngresoTituloSerRegKeyTyped
+
+    private void IngresoFechaPelRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoFechaPelRegKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Digite solo números");
+        }
+    }//GEN-LAST:event_IngresoFechaPelRegKeyTyped
+
+    private void IngresoTituloPelRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoTituloPelRegKeyTyped
+        if(IngresoTituloSerReg.getText().length() >= 45){
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_IngresoTituloPelRegKeyTyped
 
     /**
      * @param args the command line arguments
