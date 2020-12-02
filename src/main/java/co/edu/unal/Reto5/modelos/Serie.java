@@ -20,6 +20,7 @@ public class Serie {
 
     
     @Id
+    @GeneratedValue
     private int id_serie;
     @Column("titulo")
     private String titulo;

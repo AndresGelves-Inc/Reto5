@@ -3,13 +3,13 @@ CREATE SCHEMA redflix;
 use redflix;
 
 create table director(
-    id_director  int primary key,
+    id_director  int NOT NULL AUTO_INCREMENT primary key  ,
     nombre_director  char(30),
     apellidos_director char(30),
     nacionalidad  char(40)
 );
 create table serie(
-    id_serie  int primary key,
+    id_serie  int NOT NULL AUTO_INCREMENT primary key,
     titulo  char(45),
     temporadas integer,
     episodios integer
@@ -24,15 +24,15 @@ create table usuario(
     fecha_nacimiento char(40)
 );
 create table pelicula(
-    id_pelicula  int primary key,
+    id_pelicula  int NOT NULL AUTO_INCREMENT primary key,
     titulo  char(45) NOT NULL,
     resumen longtext,
     anio integer,
-    id_director integer,
-    FOREIGN KEY (id_director) REFERENCES director(id_director)
+    director varchar(45)
+    
 );
 CREATE TABLE contenidos(
-	contenido_id_ INT primary key,
+	contenido_id_ INT NOT NULL AUTO_INCREMENT primary key,
     id_pelicula int,
     id_serie int,
     titulos char(45),
@@ -47,19 +47,19 @@ CREATE TABLE registro_transm(
     FOREIGN KEY (user_name) REFERENCES usuario(user_name),
     FOREIGN KEY (id_contenido) REFERENCES contenidos(contenido_id_)
 );
-insert into director values (101, 'Hayo','Miyazaki', 'japones');
-insert into director values (102, 'Joss', 'Whedon', 'estadounidense');
-insert into director values (103, 'Christopher', 'Nolan', 'estadounidense');
-insert into director values (104, 'Bong', 'Joon-ho', 'coreano');
-insert into director values (105, 'Vincent', 'Ward', 'neozelandes');
-insert into serie values (100, 'The walking dead', 11, 153);
-insert into serie values (101, 'Viaje a las estrellas: la serie original', 3, 80);
-insert into serie values (102, 'Glow', 3, 30);
-insert into serie values (103, 'La casa de papel', 4, 31);
-insert into serie values (104, 'Friends', 10, 236);
-insert into serie values (105, 'Arrow', 8, 170);
-insert into serie values (106, 'The big bang theory', 12, 279);
-insert into serie values (107, 'Vikingos', 6, 79);
+insert into director values (1, 'Hayo','Miyazaki', 'japones');
+insert into director values (2, 'Joss', 'Whedon', 'estadounidense');
+insert into director values (3, 'Christopher', 'Nolan', 'estadounidense');
+insert into director values (4, 'Bong', 'Joon-ho', 'coreano');
+insert into director values (5, 'Vincent', 'Ward', 'neozelandes');
+insert into serie values (1, 'The walking dead', 11, 153);
+insert into serie values (2, 'Viaje a las estrellas: la serie original', 3, 80);
+insert into serie values (3, 'Glow', 3, 30);
+insert into serie values (4, 'La casa de papel', 4, 31);
+insert into serie values (5, 'Friends', 10, 236);
+insert into serie values (6, 'Arrow', 8, 170);
+insert into serie values (7, 'The big bang theory', 12, 279);
+insert into serie values (8, 'Vikingos', 6, 79);
 insert into usuario values ('lucky', 'Pedro', 'Perez', 'lucky@gmail.com', 310221122, 'lucky12342', '13-jun-1990');
 insert into usuario values ('malopez', 'Maria', 'Lopez', 'malopez@gmail.com', 312211445, 'malopez123', '01-ene-1987');
 insert into usuario values ('diva', 'Ana', 'Diaz', 'diazana@gmail.com', 3214433282, 'diva321', '15-ago-1993');
@@ -68,11 +68,11 @@ insert into usuario values ('ninja', 'Andres', 'Cruz', 'andres.cruz@gmail.com', 
 insert into usuario values ('neon', 'Nelson', 'Ruiz', 'ruiznelson@gmail.com', 3004433321, 'nelson2211', '10-may-1979');
 insert into usuario values ('rose', 'Claudia', 'Mendez', 'claumendez@gmail.com', 3043322910, 'claumend211', '02-sep-1992');
 insert into usuario values ('green', 'Jorge', 'Rodriguez', 'jorge.rodri@gmail.com', 3129943321, 'jorsh1234', '29-dic-1987');
-insert into pelicula values (100, 'Los Vengadores', 'Pelicula de superheroes basada en Marvel Comics. Nick Fury director de SHIELD recluta a Tony Stark, Steve Rogers, Bruce Banner y Thor para forma un equipo y evitar que Loki, hermano de Thor, se apodere de la tierra.', 1990 , 102);
-insert into pelicula values (101, 'Interestelar', 'Pelicula de ciencia ficción, donde la humanidad lucha por sobrevivir. La pelicula cuenta una historia de un grupo de astronautas que viajan a traves de un agujero de gusano en busca de un nuevo hogar.', 2014 , 103);
-insert into pelicula values (102, 'El viaje de Chihiro', 'Pelicula de animación japonesa. Es la historia de una niña de 12 años, quien se ve atrapada por un mundo mágico y sobrenatural, teniendo como misión buscar su libertad y la de sus padres y regresar al mundo real.', 2001 , 101);
-insert into pelicula values (103, 'Parasitos', 'Pelicula de drama, suspenso y humor negro. Toca temas como las diferencias sociales y vulnerabilidad del espiritu humano.', 2019 , 104);
-insert into pelicula values (104, 'Mas alla de los sueños', 'Pelicula de drama, narra una historia trágica de una familia, donde el padre va en busca de sus esposa al mas allá para recuperarla.', 1998 , 105);
+insert into pelicula values (1, 'Los Vengadores', 'Pelicula de superheroes basada en Marvel Comics. Nick Fury director de SHIELD recluta a Tony Stark, Steve Rogers, Bruce Banner y Thor para forma un equipo y evitar que Loki, hermano de Thor, se apodere de la tierra.', 1990 , 'Joss Whedon');
+insert into pelicula values (2, 'Interestelar', 'Pelicula de ciencia ficción, donde la humanidad lucha por sobrevivir. La pelicula cuenta una historia de un grupo de astronautas que viajan a traves de un agujero de gusano en busca de un nuevo hogar.', 2014 , 'Cristopher Nolan');
+insert into pelicula values (3, 'El viaje de Chihiro', 'Pelicula de animación japonesa. Es la historia de una niña de 12 años, quien se ve atrapada por un mundo mágico y sobrenatural, teniendo como misión buscar su libertad y la de sus padres y regresar al mundo real.', 2001 , 'Hayo Miyazaki');
+insert into pelicula values (4, 'Parasitos', 'Pelicula de drama, suspenso y humor negro. Toca temas como las diferencias sociales y vulnerabilidad del espiritu humano.', 2019 ,'Bong Joon-ho');
+insert into pelicula values (5, 'Mas alla de los sueños', 'Pelicula de drama, narra una historia trágica de una familia, donde el padre va en busca de sus esposa al mas allá para recuperarla.', 1998 , 'Vincent Ward');
 insert into contenidos values (1, 100, null,'Los Vengadores');
 insert into contenidos values (2, 101, null,'Interestelar');
 insert into contenidos values (3, 102, null,'El viaje de Chihiro');

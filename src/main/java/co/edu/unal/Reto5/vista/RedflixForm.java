@@ -10,14 +10,9 @@ import co.edu.unal.Reto5.Reto5Application;
 import co.edu.unal.Reto5.SpringContext;
 import co.edu.unal.Reto5.modelos.Pelicula;
 import co.edu.unal.Reto5.modelos.Serie;
-import co.edu.unal.Reto5.repositorios.RepositorioContenidos;
 import co.edu.unal.Reto5.repositorios.RepositorioPelicula;
 import co.edu.unal.Reto5.repositorios.RepositorioSerie;
 import co.edu.unal.Reto5.repositorios.RepositorioUsuario;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Optional;
-import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -32,7 +27,6 @@ public class RedflixForm extends javax.swing.JFrame {
     RepositorioSerie repositorioSerie;
     RepositorioPelicula repositorioPelicula;
     RepositorioUsuario repositorioUsuario;
-    RepositorioContenidos repositorioContenidos;
     
 
     public RedflixForm() {
@@ -40,6 +34,8 @@ public class RedflixForm extends javax.swing.JFrame {
         String[] args = {};
         Reto5Application.runSpringServer(args);
         repositorioSerie = SpringContext.getBean(RepositorioSerie.class);
+        repositorioPelicula = SpringContext.getBean(RepositorioPelicula.class);
+        
     }
 
     /**
@@ -81,8 +77,7 @@ public class RedflixForm extends javax.swing.JFrame {
         RadioActualizarUsu = new javax.swing.JRadioButton();
         jbBuscar = new javax.swing.JButton();
         PeliculasInterface = new javax.swing.JPanel();
-        AceptarPeliculas = new javax.swing.JButton();
-        CancelarPeliculas = new javax.swing.JButton();
+        BuscarPelículas = new javax.swing.JButton();
         RegistroPeliculas = new javax.swing.JPanel();
         LabelTituloPelReg = new javax.swing.JLabel();
         IngresoTituloPelReg = new javax.swing.JTextField();
@@ -93,9 +88,9 @@ public class RedflixForm extends javax.swing.JFrame {
         IngresoFechaPelReg = new javax.swing.JTextField();
         IngresoDirectorPelReg = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        RadioRegistrarPel = new javax.swing.JRadioButton();
-        RadioActualizarPel = new javax.swing.JRadioButton();
-        EliminarPel = new javax.swing.JRadioButton();
+        RegistrarPeliculas = new javax.swing.JButton();
+        ActualizarPeliculas = new javax.swing.JButton();
+        EliminarPeliculas = new javax.swing.JButton();
         SeriesInterface = new javax.swing.JPanel();
         RegistroSeries = new javax.swing.JPanel();
         LabelTituloSerReg = new javax.swing.JLabel();
@@ -107,23 +102,8 @@ public class RedflixForm extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         BuscarSeries = new javax.swing.JButton();
         ActualizarSeries = new javax.swing.JButton();
-        Registrar = new javax.swing.JButton();
-        Eliminar = new javax.swing.JButton();
-        BusquedaInterface = new javax.swing.JPanel();
-        LabelBusqueda = new javax.swing.JLabel();
-        IngresoBusqueda = new javax.swing.JTextField();
-        Buscar = new javax.swing.JButton();
-        CancelarBusqueda = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        RadioSerBus = new javax.swing.JRadioButton();
-        RadioPelBus = new javax.swing.JRadioButton();
-        RadioBusUsuario = new javax.swing.JRadioButton();
-        jlNotificacion = new javax.swing.JLabel();
-        jlTemporadas = new javax.swing.JLabel();
-        jlEpisodios = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jtID = new javax.swing.JTextField();
-        jltitulo = new javax.swing.JLabel();
+        RegistrarSeries = new javax.swing.JButton();
+        EliminarSeries = new javax.swing.JButton();
 
         GrupoBotonesUsuario.add(RadioRegistrarUsu);
         GrupoBotonesUsuario.add(RadioActualizarUsu);
@@ -397,17 +377,11 @@ public class RedflixForm extends javax.swing.JFrame {
         RedflixPanel.addTab("Usuarios", UsuariosInterface);
         UsuariosInterface.getAccessibleContext().setAccessibleParent(AgregarUsuario);
 
-        AceptarPeliculas.setText("Aceptar");
-        AceptarPeliculas.addActionListener(new java.awt.event.ActionListener() {
+        BuscarPelículas.setText("Buscar");
+        BuscarPelículas.setToolTipText("");
+        BuscarPelículas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AceptarPeliculasActionPerformed(evt);
-            }
-        });
-
-        CancelarPeliculas.setText("Cancelar");
-        CancelarPeliculas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarPeliculasActionPerformed(evt);
+                BuscarPelículasActionPerformed(evt);
             }
         });
 
@@ -453,84 +427,74 @@ public class RedflixForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelResumenPelReg)
                 .addGap(4, 4, 4)
-                .addComponent(IngresoResumenPelReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(IngresoResumenPelReg, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelFechaPelReg)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IngresoFechaPelReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelDirectorPelReg)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IngresoDirectorPelReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap())
         );
-
-        RadioRegistrarPel.setText("Registrar");
-        RadioRegistrarPel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RadioRegistrarPelMouseClicked(evt);
-            }
-        });
-        RadioRegistrarPel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioRegistrarPelActionPerformed(evt);
-            }
-        });
-
-        RadioActualizarPel.setText("Actualizar");
-        RadioActualizarPel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioActualizarPelActionPerformed(evt);
-            }
-        });
-
-        EliminarPel.setText("Eliminar");
-        EliminarPel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarPelActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RadioActualizarPel)
-                    .addComponent(RadioRegistrarPel)
-                    .addComponent(EliminarPel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 90, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(RadioRegistrarPel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(RadioActualizarPel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EliminarPel))
+            .addGap(0, 93, Short.MAX_VALUE)
         );
+
+        RegistrarPeliculas.setText("Registrar");
+        RegistrarPeliculas.setToolTipText("");
+        RegistrarPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarPeliculasActionPerformed(evt);
+            }
+        });
+
+        ActualizarPeliculas.setText("Actualizar");
+        ActualizarPeliculas.setToolTipText("");
+        ActualizarPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarPeliculasActionPerformed(evt);
+            }
+        });
+
+        EliminarPeliculas.setText("Eliminar");
+        EliminarPeliculas.setToolTipText("");
+        EliminarPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarPeliculasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PeliculasInterfaceLayout = new javax.swing.GroupLayout(PeliculasInterface);
         PeliculasInterface.setLayout(PeliculasInterfaceLayout);
         PeliculasInterfaceLayout.setHorizontalGroup(
             PeliculasInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PeliculasInterfaceLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addGroup(PeliculasInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BuscarPelículas))
                 .addGroup(PeliculasInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PeliculasInterfaceLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RegistroPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(ActualizarPeliculas)
+                        .addGap(18, 18, 18)
+                        .addComponent(RegistrarPeliculas)
+                        .addGap(18, 18, 18)
+                        .addComponent(EliminarPeliculas))
                     .addGroup(PeliculasInterfaceLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(AceptarPeliculas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CancelarPeliculas)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addComponent(RegistroPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         PeliculasInterfaceLayout.setVerticalGroup(
             PeliculasInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,11 +505,13 @@ public class RedflixForm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PeliculasInterfaceLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(92, 92, 92)))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addGroup(PeliculasInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AceptarPeliculas)
-                    .addComponent(CancelarPeliculas))
-                .addGap(60, 60, 60))
+                    .addComponent(ActualizarPeliculas)
+                    .addComponent(RegistrarPeliculas)
+                    .addComponent(EliminarPeliculas)
+                    .addComponent(BuscarPelículas))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         RedflixPanel.addTab("Películas", PeliculasInterface);
@@ -621,17 +587,17 @@ public class RedflixForm extends javax.swing.JFrame {
             }
         });
 
-        Registrar.setText("Registrar");
-        Registrar.addActionListener(new java.awt.event.ActionListener() {
+        RegistrarSeries.setText("Registrar");
+        RegistrarSeries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegistrarActionPerformed(evt);
+                RegistrarSeriesActionPerformed(evt);
             }
         });
 
-        Eliminar.setText("Eliminar");
-        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+        EliminarSeries.setText("Eliminar");
+        EliminarSeries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarActionPerformed(evt);
+                EliminarSeriesActionPerformed(evt);
             }
         });
 
@@ -649,13 +615,15 @@ public class RedflixForm extends javax.swing.JFrame {
                         .addComponent(BuscarSeries)))
                 .addGap(18, 18, 18)
                 .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RegistroSeries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(SeriesInterfaceLayout.createSequentialGroup()
                         .addComponent(ActualizarSeries)
                         .addGap(18, 18, 18)
-                        .addComponent(Registrar)
+                        .addComponent(RegistrarSeries)
                         .addGap(18, 18, 18)
-                        .addComponent(Eliminar)))
+                        .addComponent(EliminarSeries))
+                    .addGroup(SeriesInterfaceLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(RegistroSeries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         SeriesInterfaceLayout.setVerticalGroup(
@@ -669,166 +637,14 @@ public class RedflixForm extends javax.swing.JFrame {
                         .addGap(92, 92, 92)))
                 .addGap(18, 29, Short.MAX_VALUE)
                 .addGroup(SeriesInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Eliminar)
-                    .addComponent(Registrar)
+                    .addComponent(EliminarSeries)
+                    .addComponent(RegistrarSeries)
                     .addComponent(ActualizarSeries)
                     .addComponent(BuscarSeries))
                 .addGap(49, 49, 49))
         );
 
         RedflixPanel.addTab("Series", SeriesInterface);
-
-        LabelBusqueda.setText("Búsqueda:");
-
-        IngresoBusqueda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IngresoBusquedaActionPerformed(evt);
-            }
-        });
-        IngresoBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                IngresoBusquedaKeyPressed(evt);
-            }
-        });
-
-        Buscar.setText("Buscar");
-        Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarActionPerformed(evt);
-            }
-        });
-
-        CancelarBusqueda.setText("Cancelar");
-        CancelarBusqueda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarBusquedaActionPerformed(evt);
-            }
-        });
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de búsqueda"));
-        jPanel3.setMaximumSize(new java.awt.Dimension(100, 100));
-        jPanel3.setName("Tipo de búsqueda"); // NOI18N
-
-        RadioSerBus.setText("Series");
-        RadioSerBus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioSerBusActionPerformed(evt);
-            }
-        });
-
-        RadioPelBus.setText("Películas");
-        RadioPelBus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioPelBusActionPerformed(evt);
-            }
-        });
-
-        RadioBusUsuario.setText("Usuarios");
-        RadioBusUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RadioBusUsuarioActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RadioBusUsuario)
-                    .addComponent(RadioPelBus)
-                    .addComponent(RadioSerBus))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(RadioBusUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RadioPelBus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RadioSerBus)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jLabel2.setText("ID");
-
-        javax.swing.GroupLayout BusquedaInterfaceLayout = new javax.swing.GroupLayout(BusquedaInterface);
-        BusquedaInterface.setLayout(BusquedaInterfaceLayout);
-        BusquedaInterfaceLayout.setHorizontalGroup(
-            BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(IngresoBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                                    .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                                        .addComponent(LabelBusqueda)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                                        .addGroup(BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                                                .addGap(17, 17, 17)
-                                                .addComponent(jlNotificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(jlTemporadas))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jlEpisodios)
-                                        .addGap(68, 68, 68))))
-                            .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                        .addComponent(Buscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CancelarBusqueda)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BusquedaInterfaceLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jltitulo))
-        );
-        BusquedaInterfaceLayout.setVerticalGroup(
-            BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jltitulo)
-                .addGap(8, 8, 8)
-                .addGroup(BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Buscar)
-                            .addComponent(CancelarBusqueda))
-                        .addContainerGap(265, Short.MAX_VALUE))
-                    .addGroup(BusquedaInterfaceLayout.createSequentialGroup()
-                        .addComponent(LabelBusqueda)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IngresoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlTemporadas)
-                        .addGap(26, 26, 26)
-                        .addGroup(BusquedaInterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlNotificacion)
-                            .addComponent(jlEpisodios))
-                        .addGap(134, 134, 134))))
-        );
-
-        RedflixPanel.addTab("Búsqueda", BusquedaInterface);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -844,219 +660,12 @@ public class RedflixForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-        if (RadioRegistrarUsu.isSelected() == true) {
-            JOptionPane.showMessageDialog(null, IngresoNombreReg.getText() + IngresoApellidoReg.getText() + IngresoContrasenaReg.getText());
-        }
-        if (RadioActualizarUsu.isSelected()) {
-
-        }
-        RedflixPanel.setSelectedIndex(0);
-
-
-    }//GEN-LAST:event_AceptarActionPerformed
-
-    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        IngresoNombreReg.setText(null);
-        IngresoApellidoReg.setText(null);
-        IngresoContrasenaReg.setText(null);
-        RedflixPanel.setSelectedIndex(0);
-    }//GEN-LAST:event_CancelarActionPerformed
-
-    private void RadioActualizarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioActualizarUsuActionPerformed
-        RadioRegistrarUsu.setSelected(false);
-    }//GEN-LAST:event_RadioActualizarUsuActionPerformed
-
-    private void AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsuarioActionPerformed
-        RedflixPanel.setSelectedIndex(1);
-    }//GEN-LAST:event_AgregarUsuarioActionPerformed
-
-    private void BusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaActionPerformed
-        RedflixPanel.setSelectedIndex(4);
-    }//GEN-LAST:event_BusquedaActionPerformed
-
-    private void AgregarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPeliculaActionPerformed
-        RedflixPanel.setSelectedIndex(2);
-    }//GEN-LAST:event_AgregarPeliculaActionPerformed
-
-    private void AgregarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarSerieActionPerformed
-        RedflixPanel.setSelectedIndex(3);
-    }//GEN-LAST:event_AgregarSerieActionPerformed
-
-    private void RadioRegistrarUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RadioRegistrarUsuMouseClicked
-        RadioActualizarUsu.setSelected(false);
-    }//GEN-LAST:event_RadioRegistrarUsuMouseClicked
-
-    private void AceptarPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarPeliculasActionPerformed
-        if (RadioRegistrarPel.isSelected() == true) {
-            JOptionPane.showMessageDialog(null, IngresoTituloPelReg.getText());
-        }
-        RedflixPanel.setSelectedIndex(0);
-
-
-    }//GEN-LAST:event_AceptarPeliculasActionPerformed
-
-    private void CancelarPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarPeliculasActionPerformed
-        IngresoNombreReg.setText(null);
-        IngresoApellidoReg.setText(null);
-        IngresoContrasenaReg.setText(null);
-        RedflixPanel.setSelectedIndex(0);
-    }//GEN-LAST:event_CancelarPeliculasActionPerformed
-
-    private void RadioRegistrarPelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RadioRegistrarPelMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RadioRegistrarPelMouseClicked
-
-    private void RadioActualizarPelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioActualizarPelActionPerformed
-        RadioRegistrarPel.setSelected(false);
-    }//GEN-LAST:event_RadioActualizarPelActionPerformed
-
-    private void RadioRegistrarPelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioRegistrarPelActionPerformed
-        RadioActualizarPel.setSelected(false);
-
-    }//GEN-LAST:event_RadioRegistrarPelActionPerformed
-
-    private void IngresoBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoBusquedaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IngresoBusquedaActionPerformed
-
-    private void IngresoBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoBusquedaKeyPressed
-
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            JOptionPane.showMessageDialog(null, "Acaba de presionar la tecla enter");
-        }
-    }//GEN-LAST:event_IngresoBusquedaKeyPressed
-
-    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        
-        
-    }//GEN-LAST:event_BuscarActionPerformed
-
-    private void CancelarBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarBusquedaActionPerformed
-        RedflixPanel.setSelectedIndex(0);
-    }//GEN-LAST:event_CancelarBusquedaActionPerformed
-
-    private void RadioRegistrarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioRegistrarUsuActionPerformed
-        RadioActualizarUsu.setSelected(false);
-        IngresoNombreReg.setEnabled(true);
-        IngresoApellidoReg.setEnabled(true);
-        IngresoEmailReg.setEnabled(true);
-        IngresoUsuarioReg.setEnabled(true);
-        IngresoContrasenaReg.setEnabled(true);
-    }//GEN-LAST:event_RadioRegistrarUsuActionPerformed
-
-    private void EliminarPelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EliminarPelActionPerformed
-
-    private void RadioBusUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioBusUsuarioActionPerformed
-        RadioPelBus.setSelected(false);
-        RadioSerBus.setSelected(false);
-    }//GEN-LAST:event_RadioBusUsuarioActionPerformed
-
-    private void RadioSerBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioSerBusActionPerformed
-        RadioBusUsuario.setSelected(false);
-        RadioPelBus.setSelected(false);
-    }//GEN-LAST:event_RadioSerBusActionPerformed
-
-    private void RadioPelBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioPelBusActionPerformed
-        RadioBusUsuario.setSelected(false);
-        RadioSerBus.setSelected(false);
-    }//GEN-LAST:event_RadioPelBusActionPerformed
-
-    private void IngresoUsuarioRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoUsuarioRegActionPerformed
-        
-      
-    }//GEN-LAST:event_IngresoUsuarioRegActionPerformed
-
-    private void IngresoUsuarioRegKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoUsuarioRegKeyPressed
-        
-    }//GEN-LAST:event_IngresoUsuarioRegKeyPressed
-
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-
-    }//GEN-LAST:event_jbBuscarActionPerformed
-
-    private void BuscarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSeriesActionPerformed
-        
-        String titulo = IngresoTituloSerReg.getText();
-        try {
-            Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
-            String BuscarTitulo = optionalSerie.getTitulo();
-            if (BuscarTitulo.equals(titulo)) {
-                JOptionPane.showMessageDialog(null, "Serie disponible: " + BuscarTitulo
-                        + " consta de " + optionalSerie.getEpisodios() + " episodios en "
-                        + optionalSerie.getTemporadas() + " temporadas");
-                IngresoEpisodiosSerReg.setText(optionalSerie.getEpisodios().toString());
-                IngresoTemporadasSerReg.setText(optionalSerie.getTemporadas().toString());
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "La serie no fue encontrada");
-            IngresoTituloSerReg.setText("");
-            IngresoEpisodiosSerReg.setText("");
-            IngresoTemporadasSerReg.setText("");
-        }
-        
-    }//GEN-LAST:event_BuscarSeriesActionPerformed
-
-    private void ActualizarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarSeriesActionPerformed
-        
-        String titulo = IngresoTituloSerReg.getText();
-        Long temporadas = Long.parseLong(IngresoTemporadasSerReg.getText());
-        Long episodios = Long.parseLong(IngresoEpisodiosSerReg.getText());
-        try {
-            Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
-            String BuscarTitulo = optionalSerie.getTitulo();
-          if (BuscarTitulo.equals(titulo)) {
-              Serie serie = repositorioSerie.findByTitulo(titulo);
-              serie.setTemporadas(temporadas);
-              serie.setEpisodios(episodios);
-              serie = repositorioSerie.save(serie);
-              JOptionPane.showMessageDialog(null, "La serie \"" + titulo +"\" ha sido actualizada con éxito.");
-              IngresoTituloSerReg.setText("");
-              IngresoTemporadasSerReg.setText("");
-              IngresoEpisodiosSerReg.setText("");              
-          } 
-        }
-            
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
-        }
-        
-    }//GEN-LAST:event_ActualizarSeriesActionPerformed
-
     private void BuscarSeries1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSeries1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BuscarSeries1ActionPerformed
 
-    private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-        
-        String titulo = IngresoTituloSerReg.getText();
-        // try {
-            Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
-            String BuscarTitulo = optionalSerie.getTitulo();
-            if (!BuscarTitulo.equals(titulo)) {
-                int id_serie = (int)repositorioSerie.count() + 1;
-                Serie newSerie = new Serie();
-                newSerie.setId(id_serie);
-                newSerie.setTitulo(IngresoTituloSerReg.getText());
-                newSerie.setTemporadas(Long.parseLong(IngresoTemporadasSerReg.getText()));
-                newSerie.setEpisodios(Long.parseLong(IngresoEpisodiosSerReg.getText()));
-                repositorioSerie.save(newSerie);
-                JOptionPane.showMessageDialog(null, "La serie \"" + IngresoTituloSerReg + "\" ha sido registrada.");
-                IngresoEpisodiosSerReg.setText("");
-                IngresoTemporadasSerReg.setText("");                                
-            }           
-            
-        /*} catch (Exception e) {            
-            JOptionPane.showMessageDialog(null, "La serie ya existe.");           
-            IngresoTituloSerReg.setText("");
-        }*/
-    }//GEN-LAST:event_RegistrarActionPerformed
+    private void EliminarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarSeriesActionPerformed
 
-    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        
         String titulo = IngresoTituloSerReg.getText();
         try {
             Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
@@ -1069,12 +678,230 @@ public class RedflixForm extends javax.swing.JFrame {
                 IngresoEpisodiosSerReg.setText("");
                 IngresoTemporadasSerReg.setText("");
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "La serie no fue encontrada");
             IngresoTituloSerReg.setText("");
         }
-    }//GEN-LAST:event_EliminarActionPerformed
+    }//GEN-LAST:event_EliminarSeriesActionPerformed
+
+    private void RegistrarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarSeriesActionPerformed
+
+        String titulo = IngresoTituloSerReg.getText();
+        Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
+        if (optionalSerie == null){
+            Serie newSerie = new Serie();
+            newSerie.setTitulo(IngresoTituloSerReg.getText());
+            newSerie.setTemporadas(Long.parseLong(IngresoTemporadasSerReg.getText()));
+            newSerie.setEpisodios(Long.parseLong(IngresoEpisodiosSerReg.getText()));
+            repositorioSerie.save(newSerie);
+            JOptionPane.showMessageDialog(null, "La serie \"" + titulo + "\" ha sido registrada.");
+            IngresoEpisodiosSerReg.setText("");
+            IngresoTemporadasSerReg.setText("");
+        }else {
+            JOptionPane.showMessageDialog(null, "La serie ya existe.");
+            IngresoTituloSerReg.setText("");
+        }
+    }//GEN-LAST:event_RegistrarSeriesActionPerformed
+
+    private void ActualizarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarSeriesActionPerformed
+
+        String titulo = IngresoTituloSerReg.getText();
+        Long temporadas = Long.parseLong(IngresoTemporadasSerReg.getText());
+        Long episodios = Long.parseLong(IngresoEpisodiosSerReg.getText());
+        try {
+            Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
+            String BuscarTitulo = optionalSerie.getTitulo();
+            if (BuscarTitulo.equals(titulo)) {
+                Serie serie = repositorioSerie.findByTitulo(titulo);
+                serie.setTemporadas(temporadas);
+                serie.setEpisodios(episodios);
+                serie = repositorioSerie.save(serie);
+                JOptionPane.showMessageDialog(null, "La serie \"" + titulo +"\" ha sido actualizada con éxito.");
+                IngresoTituloSerReg.setText("");
+                IngresoTemporadasSerReg.setText("");
+                IngresoEpisodiosSerReg.setText("");
+            }
+        }
+
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
+        }
+    }//GEN-LAST:event_ActualizarSeriesActionPerformed
+
+    private void BuscarSeriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSeriesActionPerformed
+
+        String titulo = IngresoTituloSerReg.getText();
+        try {
+            Serie optionalSerie = repositorioSerie.findByTitulo(titulo);
+            String BuscarTitulo = optionalSerie.getTitulo();
+            if (BuscarTitulo.equals(titulo)) {
+                JOptionPane.showMessageDialog(null, "Serie disponible: " + BuscarTitulo
+                    + " consta de " + optionalSerie.getEpisodios() + " episodios en "
+                    + optionalSerie.getTemporadas() + " temporadas");
+                IngresoEpisodiosSerReg.setText(optionalSerie.getEpisodios().toString());
+                IngresoTemporadasSerReg.setText(optionalSerie.getTemporadas().toString());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La serie no fue encontrada");
+            IngresoTituloSerReg.setText("");
+            IngresoEpisodiosSerReg.setText("");
+            IngresoTemporadasSerReg.setText("");
+        }
+    }//GEN-LAST:event_BuscarSeriesActionPerformed
+
+    private void AgregarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPeliculaActionPerformed
+        RedflixPanel.setSelectedIndex(2);
+    }//GEN-LAST:event_AgregarPeliculaActionPerformed
+
+    private void AgregarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarSerieActionPerformed
+        RedflixPanel.setSelectedIndex(3);
+    }//GEN-LAST:event_AgregarSerieActionPerformed
+
+    private void BuscarPelículasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarPelículasActionPerformed
+        String titulo = IngresoTituloPelReg.getText();
+        try {
+            Pelicula optionalPelicula = repositorioPelicula.findByTitulo(titulo);
+            String BuscarTitulo = optionalPelicula.getTitulo();
+            if (BuscarTitulo.equals(titulo)) {
+                JOptionPane.showMessageDialog(null, "Película disponible: " + BuscarTitulo
+                    + " fue lanzada en " + optionalPelicula.getAnio()+ " por el director "
+                    + optionalPelicula.getDirector());
+                
+                IngresoTituloPelReg.setText(optionalPelicula.getTitulo());
+                IngresoResumenPelReg.setText(optionalPelicula.getResumen());
+                IngresoFechaPelReg.setText(optionalPelicula.getAnio());
+                IngresoDirectorPelReg.setText(optionalPelicula.getDirector());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La película no fue encontrada");
+            IngresoTituloSerReg.setText("");
+            IngresoEpisodiosSerReg.setText("");
+            IngresoTemporadasSerReg.setText("");
+        }
+    }//GEN-LAST:event_BuscarPelículasActionPerformed
+
+    private void RegistrarPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarPeliculasActionPerformed
+        String titulo_pel = IngresoTituloPelReg.getText();
+        Pelicula optionalPelicula = repositorioPelicula.findByTitulo(titulo_pel);
+        if (optionalPelicula == null){
+            Pelicula newPelicula = new Pelicula();
+            newPelicula.setTitulo(IngresoTituloPelReg.getText());
+            newPelicula.setResumen(IngresoResumenPelReg.getText());
+            newPelicula.setAnio(IngresoFechaPelReg.getText());
+            newPelicula.setDirector(IngresoDirectorPelReg.getText());
+            
+            repositorioPelicula.save(newPelicula);
+            JOptionPane.showMessageDialog(null, "La pelicula \"" + titulo_pel + "\" ha sido registrada.");
+            IngresoEpisodiosSerReg.setText("");
+            IngresoTemporadasSerReg.setText("");
+        }else {
+            JOptionPane.showMessageDialog(null, "La pelicula ya existe.");
+            IngresoTituloSerReg.setText("");
+        }
+    }//GEN-LAST:event_RegistrarPeliculasActionPerformed
+
+    private void ActualizarPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarPeliculasActionPerformed
+        String titulo_pel = IngresoTituloPelReg.getText();
+        try {
+            Pelicula optionalPelicula = repositorioPelicula.findByTitulo(titulo_pel);
+            String BuscarTitulo = optionalPelicula.getTitulo();
+            if (BuscarTitulo.equals(titulo_pel)) {
+                Pelicula pelicula = repositorioPelicula.findByTitulo(titulo_pel);
+                pelicula.setResumen(IngresoResumenPelReg.getText());
+                pelicula.setAnio(IngresoFechaPelReg.getText());
+                pelicula.setDirector(IngresoDirectorPelReg.getText());
+                pelicula = repositorioPelicula.save(pelicula);
+                JOptionPane.showMessageDialog(null, "La película \"" + titulo_pel +"\" ha sido actualizada con éxito.");
+                IngresoTituloPelReg.setText("");
+                IngresoResumenPelReg.setText("");
+                IngresoFechaPelReg.setText("");
+                IngresoDirectorPelReg.setText("");
+            }
+        }
+
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Los cambios no fueron guardados");
+        }
+    }//GEN-LAST:event_ActualizarPeliculasActionPerformed
+
+    private void EliminarPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPeliculasActionPerformed
+        String titulo_pel = IngresoTituloPelReg.getText();
+        try {
+            Pelicula optionalPelicula = repositorioPelicula.findByTitulo(titulo_pel);
+            String BuscarTitulo = optionalPelicula.getTitulo();
+            if (BuscarTitulo.equals(titulo_pel)) {
+                int id_serie = optionalPelicula.getId_pelicula();
+                repositorioPelicula.deleteById(id_serie);
+                JOptionPane.showMessageDialog(null, "La película \"" + titulo_pel + "\" ha sido eliminada exitosamente.");
+                IngresoTituloPelReg.setText("");
+                IngresoDirectorPelReg.setText("");
+                IngresoFechaPelReg.setText("");
+                IngresoResumenPelReg.setText("");
+                
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La película no fue encontrada");
+            IngresoTituloSerReg.setText("");
+        }
+    }//GEN-LAST:event_EliminarPeliculasActionPerformed
+
+    private void BusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaActionPerformed
+        RedflixPanel.setSelectedIndex(4);
+    }//GEN-LAST:event_BusquedaActionPerformed
+
+    private void AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarUsuarioActionPerformed
+        RedflixPanel.setSelectedIndex(1);
+    }//GEN-LAST:event_AgregarUsuarioActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void RadioActualizarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioActualizarUsuActionPerformed
+        RadioRegistrarUsu.setSelected(false);
+    }//GEN-LAST:event_RadioActualizarUsuActionPerformed
+
+    private void RadioRegistrarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioRegistrarUsuActionPerformed
+        RadioActualizarUsu.setSelected(false);
+        IngresoNombreReg.setEnabled(true);
+        IngresoApellidoReg.setEnabled(true);
+        IngresoEmailReg.setEnabled(true);
+        IngresoUsuarioReg.setEnabled(true);
+        IngresoContrasenaReg.setEnabled(true);
+    }//GEN-LAST:event_RadioRegistrarUsuActionPerformed
+
+    private void RadioRegistrarUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RadioRegistrarUsuMouseClicked
+        RadioActualizarUsu.setSelected(false);
+    }//GEN-LAST:event_RadioRegistrarUsuMouseClicked
+
+    private void IngresoUsuarioRegKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IngresoUsuarioRegKeyPressed
+
+    }//GEN-LAST:event_IngresoUsuarioRegKeyPressed
+
+    private void IngresoUsuarioRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoUsuarioRegActionPerformed
+
+    }//GEN-LAST:event_IngresoUsuarioRegActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        IngresoNombreReg.setText(null);
+        IngresoApellidoReg.setText(null);
+        IngresoContrasenaReg.setText(null);
+        RedflixPanel.setSelectedIndex(0);
+    }//GEN-LAST:event_CancelarActionPerformed
+
+    private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
+        if (RadioRegistrarUsu.isSelected() == true) {
+            JOptionPane.showMessageDialog(null, IngresoNombreReg.getText() + IngresoApellidoReg.getText() + IngresoContrasenaReg.getText());
+        }
+        if (RadioActualizarUsu.isSelected()) {
+
+        }
+        RedflixPanel.setSelectedIndex(0);
+    }//GEN-LAST:event_AceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1117,25 +944,21 @@ public class RedflixForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
-    private javax.swing.JButton AceptarPeliculas;
+    private javax.swing.JButton ActualizarPeliculas;
     private javax.swing.JButton ActualizarSeries;
     private javax.swing.JButton AgregarPelicula;
     private javax.swing.JButton AgregarSerie;
     private javax.swing.JButton AgregarUsuario;
-    private javax.swing.JButton Buscar;
+    private javax.swing.JButton BuscarPelículas;
     private javax.swing.JButton BuscarSeries;
     private javax.swing.JButton BuscarSeries1;
     private javax.swing.JButton Busqueda;
-    private javax.swing.JPanel BusquedaInterface;
     private javax.swing.JButton Cancelar;
-    private javax.swing.JButton CancelarBusqueda;
-    private javax.swing.JButton CancelarPeliculas;
-    private javax.swing.JButton Eliminar;
-    private javax.swing.JRadioButton EliminarPel;
+    private javax.swing.JButton EliminarPeliculas;
+    private javax.swing.JButton EliminarSeries;
     private javax.swing.ButtonGroup GrupoBotonesUsuario;
     private javax.swing.JLabel Imagen;
     private javax.swing.JTextField IngresoApellidoReg;
-    private javax.swing.JTextField IngresoBusqueda;
     private javax.swing.JPasswordField IngresoContrasenaReg;
     private javax.swing.JTextField IngresoDirectorPelReg;
     private javax.swing.JTextField IngresoEmailReg;
@@ -1150,7 +973,6 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JPanel Inicio;
     private javax.swing.JLabel Intro;
     private javax.swing.JLabel LabelApellidoReg;
-    private javax.swing.JLabel LabelBusqueda;
     private javax.swing.JLabel LabelContrasena;
     private javax.swing.JLabel LabelDirectorPelReg;
     private javax.swing.JLabel LabelEmailReg;
@@ -1163,32 +985,21 @@ public class RedflixForm extends javax.swing.JFrame {
     private javax.swing.JLabel LabelTituloSerReg;
     private javax.swing.JLabel LabelUsuarioReg;
     private javax.swing.JPanel PeliculasInterface;
-    private javax.swing.JRadioButton RadioActualizarPel;
     private javax.swing.JRadioButton RadioActualizarUsu;
-    private javax.swing.JRadioButton RadioBusUsuario;
-    private javax.swing.JRadioButton RadioPelBus;
-    private javax.swing.JRadioButton RadioRegistrarPel;
     private javax.swing.JRadioButton RadioRegistrarUsu;
-    private javax.swing.JRadioButton RadioSerBus;
     private javax.swing.JTabbedPane RedflixPanel;
-    private javax.swing.JButton Registrar;
+    private javax.swing.JButton RegistrarPeliculas;
+    private javax.swing.JButton RegistrarSeries;
     private javax.swing.JPanel RegistroPeliculas;
     private javax.swing.JPanel RegistroSeries;
     private javax.swing.JPanel RegistroUsuarios;
     private javax.swing.JPanel SeriesInterface;
     private javax.swing.JPanel UsuariosInterface;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JLabel jlEpisodios;
-    private javax.swing.JLabel jlNotificacion;
-    private javax.swing.JLabel jlTemporadas;
-    private javax.swing.JLabel jltitulo;
-    private javax.swing.JTextField jtID;
     // End of variables declaration//GEN-END:variables
 
    

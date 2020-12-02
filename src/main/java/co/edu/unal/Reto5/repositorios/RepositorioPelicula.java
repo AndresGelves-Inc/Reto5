@@ -7,17 +7,17 @@ package co.edu.unal.Reto5.repositorios;
 
 
 import co.edu.unal.Reto5.modelos.Pelicula;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author malej
  */
+@Repository
 public interface RepositorioPelicula extends CrudRepository<Pelicula, Integer> {
     
-    @Query("SELECT * FROM Pelicula WHERE titulo= ?1")
-    Pelicula findByTitulo (@Param("titulo") String titulo); 
+    //@Query("SELECT * FROM Pelicula WHERE titulo= ?1")
+    Pelicula findByTitulo (String titulo); 
     
 }
